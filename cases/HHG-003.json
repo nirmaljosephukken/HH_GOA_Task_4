@@ -71,7 +71,15 @@
         ]
       },
       {
-        "claim": "Investigator note (LLM): Prior cases confirmed five previous fraud investigations on card C08623-K2, predominantly for out-of-region use and account takeover. The flagged in-person transaction at billing region 330 aligns with routine purchase geography for this card. Case-memory models and related transactions show low fraud indicators (0.8% calibrated rate). However, the chronic history of repeated card compromise suggests ongoing vulnerability or potential friendly fraud.",
+        "claim": "Earlier agent cases with a similar profile: CASE-2016-ADHOC-591 (fraud, out_of_region_use)",
+        "source": "graph",
+        "ref": "similar_agent_cases",
+        "entity_ids": [
+          "CASE-2016-ADHOC-591"
+        ]
+      },
+      {
+        "claim": "Investigator note (LLM): Prior case lookup for customer C08623 confirmed a severe history of multiple repeat fraud incidents (five confirmed fraud cases, mostly out-of-region use) on card C08623-K2 despite reissues. The disputed $49.00 in-person transaction occurred in routine region 330, but aligns with the customer's established vulnerability profile. Case memory and prior investigation history strongly indicate ongoing compromise. Uncertainty remains whether this specific $49 charge represents lingering card compromise or localized skimming.",
         "source": "graph",
         "ref": "llm_investigator",
         "entity_ids": [
@@ -94,7 +102,7 @@
       "CC-3028",
       "CC-5133"
     ],
-    "summary": "This case was triggered by customer C08623 reporting an unrecognised in-person transaction 3530164 for $49.00 at billing region 330. The graph showed routine purchase geography for this card and a case-memory calibrated fraud rate of 0.8%, though the card has 5 earlier confirmed fraud cases. The initial fraud probability of 0.17 rose to a final fraud_probability_final of 0.63. The verdict is uncertain because the cardholder's denial conflicts with graph evidence of normal use, leading to an escalated status. As next steps, blocking the card was recommended at L1 pending approval, and the case was escalated to an analyst.",
+    "summary": "This case was triggered by customer C08623 reporting an unrecognised in-person transaction 3530164 for $49.00 on card C08623-K2. The graph showed routine activity in billing region 330 with a low graph-only probability of 0.015, but the overall fraud probability increased from an initial 0.17 to a final 0.63 due to a severe history of five earlier confirmed fraud cases on the card and the cardholder's simulated denial. The verdict is uncertain because the transaction occurred in a routine region yet aligns with the customer's vulnerability profile. The case was escalated, and blocking the card was recommended pending approval.",
     "written_to_graph": true,
     "graph_case_id": "CASE-2016-0003"
   },
@@ -152,6 +160,6 @@
   },
   "stop_reason": "Stopped after the evidence request: the cardholder's denial settles the next step under policy section 6 (probability 0.63); further queries would not change the actions.",
   "tool_calls": 11,
-  "tokens": 4414,
-  "latency_s": 6.9
+  "tokens": 4558,
+  "latency_s": 8.8
 }

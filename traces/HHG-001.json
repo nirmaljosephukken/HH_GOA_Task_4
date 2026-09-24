@@ -49,10 +49,10 @@
      "customer": 2,
      "customer_cards": 1
     },
-    "latency_s": 0.276,
+    "latency_s": 0.297,
     "transport": "restpp"
    },
-   "elapsed_s": 0.28
+   "elapsed_s": 0.3
   },
   {
    "step": 4,
@@ -68,10 +68,10 @@
     "result": {
      "rows": 304
     },
-    "latency_s": 1.102,
+    "latency_s": 0.321,
     "transport": "restpp"
    },
-   "elapsed_s": 1.38
+   "elapsed_s": 0.62
   },
   {
    "step": 5,
@@ -95,10 +95,10 @@
      "first_ts": "2016-07-06 14:47:52",
      "last_ts": "2016-12-04 18:51:28"
     },
-    "latency_s": 0.281,
+    "latency_s": 0.296,
     "transport": "restpp"
    },
-   "elapsed_s": 1.66
+   "elapsed_s": 0.92
   },
   {
    "step": 6,
@@ -112,10 +112,10 @@
     "result": {
      "rows": 15
     },
-    "latency_s": 0.279,
+    "latency_s": 0.29,
     "transport": "restpp"
    },
-   "elapsed_s": 1.94
+   "elapsed_s": 1.21
   },
   {
    "step": 7,
@@ -134,10 +134,10 @@
     "result": {
      "rows": 0
     },
-    "latency_s": 0.28,
+    "latency_s": 0.291,
     "transport": "restpp"
    },
-   "elapsed_s": 2.22
+   "elapsed_s": 1.5
   },
   {
    "step": 8,
@@ -151,12 +151,12 @@
     "result": {
      "closed_cases": 4,
      "connected_closed_cases": 0,
-     "agent_cases": 1
+     "agent_cases": 3
     },
-    "latency_s": 0.282,
+    "latency_s": 0.29,
     "transport": "restpp"
    },
-   "elapsed_s": 2.51
+   "elapsed_s": 1.79
   },
   {
    "step": 9,
@@ -211,8 +211,8 @@
      "entity_ids": [
       "CC-2964",
       "CC-1066",
-      "CC-1673",
-      "CC-3587"
+      "CC-3587",
+      "CC-1673"
      ],
      "lr": 1.3,
      "family": "history",
@@ -220,7 +220,7 @@
      "step": 8
     }
    ],
-   "elapsed_s": 2.51
+   "elapsed_s": 1.8
   },
   {
    "step": 10,
@@ -235,10 +235,10 @@
     "result": {
      "rows": 8
     },
-    "latency_s": 0.277,
+    "latency_s": 0.292,
     "transport": "restpp"
    },
-   "elapsed_s": 2.79
+   "elapsed_s": 2.09
   },
   {
    "step": 11,
@@ -253,10 +253,10 @@
     "result": {
      "rows": 6
     },
-    "latency_s": 0.282,
+    "latency_s": 0.428,
     "transport": "restpp"
    },
-   "elapsed_s": 3.07
+   "elapsed_s": 2.52
   },
   {
    "step": 12,
@@ -271,10 +271,10 @@
     "result": {
      "rows": 4
     },
-    "latency_s": 0.278,
+    "latency_s": 0.294,
     "transport": "restpp"
    },
-   "elapsed_s": 3.35
+   "elapsed_s": 2.82
   },
   {
    "step": 13,
@@ -288,12 +288,12 @@
     "result": {
      "closed_cases": 4,
      "connected_closed_cases": 0,
-     "agent_cases": 1
+     "agent_cases": 3
     },
-    "latency_s": 0.276,
+    "latency_s": 0.295,
     "transport": "restpp"
    },
-   "elapsed_s": 8.38
+   "elapsed_s": 4.14
   },
   {
    "step": 14,
@@ -309,9 +309,9 @@
       }
      }
     ],
-    "notes": "Review of prior customer cases confirmed four previous fraud investigations on card C12382-K1 involving out-of-region use and card-not-present activity. The current transaction (3514030) is an in-person purchase within the home billing region (444) with a low calibrated fraud rate of 1.1%. Similar past investigations on this profile were consistently cleared as legitimate travel or standard local usage. The historical fraud pattern suggests vulnerability, but the current transaction details show normal in-region card-present behavior."
+    "notes": "Prior fraud cases for customer C12382 confirm multiple historical compromise events on card C12382-K1 involving out-of-region use and CNP fraud. The current flagged transaction (77.07, in-person, region 444) aligns with the cardholder's home region and shows very low case-memory fraud probability (0.025). The prior frauds demonstrate a vulnerability history, but this specific in-person event lacks anomalous location indicators."
    },
-   "elapsed_s": 10.28
+   "elapsed_s": 5.62
   },
   {
    "step": 15,
@@ -335,7 +335,7 @@
      "Cardholder has not confirmed or denied the transaction"
     ]
    },
-   "elapsed_s": 10.28
+   "elapsed_s": 5.62
   },
   {
    "step": 16,
@@ -364,7 +364,7 @@
     "why_request": "",
     "policy_check": []
    },
-   "elapsed_s": 10.28
+   "elapsed_s": 5.62
   },
   {
    "step": 17,
@@ -379,7 +379,7 @@
     ],
     "awaiting": []
    },
-   "elapsed_s": 10.28
+   "elapsed_s": 5.62
   },
   {
    "step": 18,
@@ -387,11 +387,11 @@
    "kind": "llm",
    "title": "Case narrative written by gemini-3.5-flash-lite (3/3 fields accepted)",
    "detail": {
-    "summary": "Transaction 3514030 for $77.07 in billing region 444.0 triggered a review after being scored at 0.61 by the real-time model. The graph and case-memory analysis showed a calibrated fraud rate of 1.1% (probability 0.025), noting that the cardholder profile made 10 earlier card-present purchases in bil",
+    "summary": "This case was triggered by the real-time model scoring transaction 3514030 in billing region 444.0 at 0.61. The graph and evidence showed a case-memory fraud probability of 0.025 and established that the cardholder profile made 10 earlier card-present purchases in billing region 444. Although the ca",
     "sar_narrative": "",
     "pattern_description": ""
    },
-   "elapsed_s": 11.68
+   "elapsed_s": 7.44
   },
   {
    "step": 19,
@@ -412,7 +412,7 @@
      ]
     }
    },
-   "elapsed_s": 11.68
+   "elapsed_s": 7.44
   }
  ],
  "llm": {

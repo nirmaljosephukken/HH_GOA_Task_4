@@ -519,7 +519,7 @@ def evolution(v: vm.View):
         body = (stage("1 · Case-memory prior", v.prior, None, "Model score only, before the graph")
                 + "<div class='arr'>→</div>"
                 + stage("2 · Graph evidence", None, None, "",
-                        f"<div class='reply'>{a['tool_calls']} TigerGraph queries via MCP · {v.final.support} independent "
+                        f"<div class='reply'>{a['tool_calls']} TigerGraph queries via {e(via_text(v.events))} · {v.final.support} independent "
                         f"line(s) agree · no customer contact needed</div>", mid=True)
                 + "<div class='arr'>→</div>"
                 + stage("3 · Decision", v.p_final, v.final.confidence, f_act))
@@ -680,10 +680,17 @@ def saved_time(case_id: str) -> str:
     return datetime.fromtimestamp(p.stat().st_mtime).strftime("%d %b %Y, %H:%M") if p.exists() else ""
 
 
-def run_banner(kind: str, answer: dict, when: str):
+def via_text(events: list | None) -> str:
+    ts = Counter(str((ev.get("detail") or {}).get("transport", "")).upper() for ev in (events or [])
+                 if ev.get("kind") == "tool" and isinstance(ev.get("detail"), dict))
+    ts.pop("", None)
+    return " + ".join(ts) if ts else "TigerGraph"
+
+
+def run_banner(kind: str, answer: dict, when: str, events: list | None = None):
     if kind == "live":
         st.html(f"<div class='runbar live'><span class='chip c-legit'><span class='d' style='background:var(--legit)'></span>"
-                f"Live run</span><span>{e(when)} · {answer['tool_calls']} TigerGraph calls via MCP · {answer['latency_s']}s · "
+                f"Live run</span><span>{e(when)} · {answer['tool_calls']} TigerGraph calls via {e(via_text(events))} · {answer['latency_s']}s · "
                 f"written to the graph as {e(answer['case']['graph_case_id'])}</span></div>")
     else:
         st.html(f"<div class='runbar'><span class='chip'>Saved investigation</span><span>last run {e(when)} · "
@@ -803,7 +810,7 @@ def page_investigate():
                 indent=1, default=str))
         if saved_view:
             st.query_params.pop("view", None)
-        run_banner("live", answer, when)
+        run_banner("live", answer, when, inv.events)
         compare_strip(prev, answer)
         show_investigation(case, answer, inv.events)
         return
@@ -811,7 +818,7 @@ def page_investigate():
     res = st.session_state.get("result")
     if live and res and live["case_id"] == case["case_id"] and res[1]["case_id"] == case["case_id"] and not saved_view:
         # a live run from this session (e.g. after pressing Approve): keep showing it
-        run_banner("live", res[1], live["when"])
+        run_banner("live", res[1], live["when"], res[2])
         compare_strip(live["prev"], res[1])
         show_investigation(*res)
         return

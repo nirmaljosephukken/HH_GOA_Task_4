@@ -49,10 +49,10 @@
      "customer": 2,
      "customer_cards": 2
     },
-    "latency_s": 0.258,
+    "latency_s": 0.29,
     "transport": "restpp"
    },
-   "elapsed_s": 0.26
+   "elapsed_s": 0.29
   },
   {
    "step": 4,
@@ -68,10 +68,10 @@
     "result": {
      "rows": 772
     },
-    "latency_s": 0.545,
+    "latency_s": 0.34,
     "transport": "restpp"
    },
-   "elapsed_s": 0.81
+   "elapsed_s": 0.63
   },
   {
    "step": 5,
@@ -95,10 +95,10 @@
      "first_ts": "2016-07-06 14:31:05",
      "last_ts": "2016-12-10 12:12:41"
     },
-    "latency_s": 0.261,
+    "latency_s": 0.3,
     "transport": "restpp"
    },
-   "elapsed_s": 1.07
+   "elapsed_s": 0.93
   },
   {
    "step": 6,
@@ -112,10 +112,10 @@
     "result": {
      "rows": 2
     },
-    "latency_s": 0.259,
+    "latency_s": 0.287,
     "transport": "restpp"
    },
-   "elapsed_s": 1.33
+   "elapsed_s": 1.22
   },
   {
    "step": 7,
@@ -134,10 +134,10 @@
     "result": {
      "rows": 1
     },
-    "latency_s": 0.257,
+    "latency_s": 0.291,
     "transport": "restpp"
    },
-   "elapsed_s": 1.59
+   "elapsed_s": 1.52
   },
   {
    "step": 8,
@@ -153,10 +153,10 @@
      "connected_closed_cases": 0,
      "agent_cases": 1
     },
-    "latency_s": 0.26,
+    "latency_s": 0.283,
     "transport": "restpp"
    },
-   "elapsed_s": 1.85
+   "elapsed_s": 1.81
   },
   {
    "step": 9,
@@ -241,7 +241,7 @@
      "step": 8
     }
    ],
-   "elapsed_s": 1.85
+   "elapsed_s": 1.81
   },
   {
    "step": 10,
@@ -256,10 +256,10 @@
     "result": {
      "rows": 8
     },
-    "latency_s": 0.316,
+    "latency_s": 0.29,
     "transport": "restpp"
    },
-   "elapsed_s": 2.17
+   "elapsed_s": 2.11
   },
   {
    "step": 11,
@@ -274,10 +274,10 @@
     "result": {
      "rows": 6
     },
-    "latency_s": 0.263,
+    "latency_s": 0.35,
     "transport": "restpp"
    },
-   "elapsed_s": 2.43
+   "elapsed_s": 2.46
   },
   {
    "step": 12,
@@ -292,10 +292,10 @@
     "result": {
      "rows": 4
     },
-    "latency_s": 0.257,
+    "latency_s": 0.294,
     "transport": "restpp"
    },
-   "elapsed_s": 2.69
+   "elapsed_s": 2.75
   },
   {
    "step": 13,
@@ -311,10 +311,10 @@
      "connected_closed_cases": 0,
      "agent_cases": 1
     },
-    "latency_s": 0.259,
+    "latency_s": 0.29,
     "transport": "restpp"
    },
-   "elapsed_s": 3.99
+   "elapsed_s": 4.23
   },
   {
    "step": 14,
@@ -330,9 +330,9 @@
       }
      }
     ],
-    "notes": "Prior cases confirmed five previous fraud investigations on card C08623-K2, predominantly for out-of-region use and account takeover. The flagged in-person transaction at billing region 330 aligns with routine purchase geography for this card. Case-memory models and related transactions show low fraud indicators (0.8% calibrated rate). However, the chronic history of repeated card compromise suggests ongoing vulnerability or potential friendly fraud."
+    "notes": "Prior case lookup for customer C08623 confirmed a severe history of multiple repeat fraud incidents (five confirmed fraud cases, mostly out-of-region use) on card C08623-K2 despite reissues. The disputed $49.00 in-person transaction occurred in routine region 330, but aligns with the customer's established vulnerability profile. Case memory and prior investigation history strongly indicate ongoing compromise. Uncertainty remains whether this specific $49 charge represents lingering card compromise or localized skimming."
    },
-   "elapsed_s": 5.18
+   "elapsed_s": 5.91
   },
   {
    "step": 15,
@@ -359,7 +359,7 @@
      "Evidence conflicts: trigger point to fraud; behaviour, ml point to legitimate use"
     ]
    },
-   "elapsed_s": 5.18
+   "elapsed_s": 5.91
   },
   {
    "step": 16,
@@ -388,7 +388,7 @@
     "why_request": "The cardholder's report is the main evidence; the graph does not independently confirm it. Confirming possession of the card and the disputed details settles R2 vs R3.",
     "policy_check": []
    },
-   "elapsed_s": 5.19
+   "elapsed_s": 5.91
   },
   {
    "step": 17,
@@ -403,7 +403,7 @@
     ],
     "awaiting": []
    },
-   "elapsed_s": 5.19
+   "elapsed_s": 5.91
   },
   {
    "step": 18,
@@ -413,7 +413,7 @@
    "detail": {
     "why": "The cardholder's report is the main evidence; the graph does not independently confirm it. Confirming possession of the card and the disputed details settles R2 vs R3."
    },
-   "elapsed_s": 5.19
+   "elapsed_s": 5.93
   },
   {
    "step": 19,
@@ -423,7 +423,7 @@
    "detail": {
     "lr": 8.0
    },
-   "elapsed_s": 5.19
+   "elapsed_s": 5.93
   },
   {
    "step": 20,
@@ -439,7 +439,7 @@
      "customer": 2.079
     }
    },
-   "elapsed_s": 5.19
+   "elapsed_s": 5.93
   },
   {
    "step": 21,
@@ -466,7 +466,7 @@
     ],
     "policy_check": []
    },
-   "elapsed_s": 5.19
+   "elapsed_s": 5.93
   },
   {
    "step": 22,
@@ -474,11 +474,11 @@
    "kind": "llm",
    "title": "Case narrative written by gemini-3.5-flash-lite (3/3 fields accepted)",
    "detail": {
-    "summary": "This case was triggered by customer C08623 reporting an unrecognised in-person transaction 3530164 for $49.00 at billing region 330. The graph showed routine purchase geography for this card and a case-memory calibrated fraud rate of 0.8%, though the card has 5 earlier confirmed fraud cases. The ini",
+    "summary": "This case was triggered by customer C08623 reporting an unrecognised in-person transaction 3530164 for $49.00 on card C08623-K2. The graph showed routine activity in billing region 330 with a low graph-only probability of 0.015, but the overall fraud probability increased from an initial 0.17 to a f",
     "sar_narrative": "",
     "pattern_description": ""
    },
-   "elapsed_s": 6.61
+   "elapsed_s": 7.88
   },
   {
    "step": 23,
@@ -499,7 +499,7 @@
      ]
     }
    },
-   "elapsed_s": 6.61
+   "elapsed_s": 7.88
   }
  ],
  "llm": {
