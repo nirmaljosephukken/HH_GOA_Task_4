@@ -130,3 +130,5 @@ ui/             SentinelGraph console          docs/     blog post, demo script,
 * Customer, step-up and analyst replies are not provided in this round. The agent simulates them from the evidence it has (never from hidden labels) and states each assumption in `evidence_requests`.
 * The memory model is trained only on the provided closed cases. No original IEEE-CIS/Kaggle files are used.
 * Card IDs are derived exactly (100% match on all closed cases and the case pack) by ranking each customer's `card6` values.
+#   H H _ G O A _ T a s k _ 4  
+ 
