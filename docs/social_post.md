@@ -23,4 +23,4 @@ Blog: <link> · Demo: <link> · Code: <link>
 
 ## X (280 chars)
 
-Built an AI fraud-investigation agent on @TigerGraphDB for @247pmstudio #HackerHouseGoa: GSQL + MCP tools, GraphRAG over 5.6k closed cases, explicit uncertainty, policy-routed next best actions. It found a 28-card device ring and a just-under-$500 structuring scheme. <link>
+Built an AI fraud-investigation agent on @TigerGraphDB for @247pmstudio #HackerHouseGoa: GSQL + MCP, GraphRAG over 5.6k closed cases, explicit uncertainty, policy-routed next best actions. It found a 28-card device ring and a sub-$500 structuring scheme. <link>
