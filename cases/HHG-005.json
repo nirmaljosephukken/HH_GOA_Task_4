@@ -47,29 +47,29 @@
         ]
       },
       {
-        "claim": "Case memory: similar prior investigations retrieved - CC-1672 (confirmed_fraud, card_not_present_new_device, $174.92): Case CC-1672: cardholder C05551 reported unrecognized activity on card C05551-K2. 1 transaction(s) between 201; CC-0413 (cleared, none, $0.00): Case CC-0413: model scored a $39.95 transaction at 0.90. Cardholder confirmed the purchase from a new phone. D; CC-0010 (cleared, none, $0.00): Case CC-0010: model scored a $96.95 transaction at 0.83. Cardholder confirmed the purchase from a new phone. D",
+        "claim": "Case memory: similar prior investigations retrieved - CC-1672 (confirmed_fraud, card_not_present_new_device, $174.92): Case CC-1672: cardholder C05551 reported unrecognized activity on card C05551-K2. 1 transaction(s) between 201; CC-0681 (cleared, none, $0.00): Case CC-0681: model scored a $299.98 transaction at 0.81. Cardholder confirmed the purchase from a new phone. ; CC-0546 (cleared, none, $0.00): Case CC-0546: model scored a $100.05 transaction at 0.91. Cardholder confirmed the purchase from a new phone. ",
         "source": "graph",
         "ref": "similar_closed_cases + prior_cases + device_cases",
         "entity_ids": [
           "CC-1672",
-          "CC-0413",
-          "CC-0010",
-          "CC-1887",
-          "CC-5262"
+          "CC-0681",
+          "CC-0546",
+          "CC-0317",
+          "CC-0413"
         ]
       },
       {
-        "claim": "Earlier agent cases with a similar profile: CASE-2016-0020 (legitimate, none); CASE-2016-0007 (legitimate, none); CASE-2016-0010 (legitimate, none)",
+        "claim": "Earlier agent cases with a similar profile: CASE-2016-0002 (legitimate, none); CASE-2016-0017 (legitimate, none); CASE-2016-0020 (legitimate, none)",
         "source": "graph",
         "ref": "similar_agent_cases",
         "entity_ids": [
-          "CASE-2016-0020",
-          "CASE-2016-0007",
-          "CASE-2016-0010"
+          "CASE-2016-0002",
+          "CASE-2016-0017",
+          "CASE-2016-0020"
         ]
       },
       {
-        "claim": "Investigator note (LLM): Prior cases for customer C02923 confirmed a severe history of account takeover with three prior fraud cases on card C02923-K1. The current online transaction originates from a new device profile sharing usage with other accounts and prior fraud. Case-memory and bank models assign divergent risk scores, but the recurring ATO pattern elevates concern. Significant uncertainty remains as to whether the legitimate cardholder or an ongoing compromise actor is operating the new device.",
+        "claim": "Investigator note (LLM): Customer C02923 has three prior confirmed account takeover fraud cases on this same card (`C02923-K1`) from August and September 2016. The current online transaction of $100.07 originates from a new iOS device profile with low case-memory fraud probability (0.8%). While prior cases establish a heavy history of takeover, the current low model score and lack of active ring indicators leave ambiguity.",
         "source": "graph",
         "ref": "llm_investigator",
         "entity_ids": [
@@ -87,12 +87,12 @@
     ],
     "similar_prior_cases": [
       "CC-1672",
-      "CC-0413",
-      "CC-0010",
-      "CC-1887",
-      "CC-5262"
+      "CC-0681",
+      "CC-0546",
+      "CC-0317",
+      "CC-0413"
     ],
-    "summary": "The real-time model scored transaction 3523199 for $100.07 at 0.54, triggering case HHG-005 under Policy 3a. The graph analysis showed a new device profile shared with other accounts, alongside a history of account takeover on card C02923-K1, though similar prior cases had been cleared as legitimate. The verdict is legitimate and the case is closed because the cardholder confirmed the transaction via step-up authentication. No further action is required.",
+    "summary": "This case was triggered when the real-time model scored an online transaction of $100.07 at 0.54. The graph and case-memory model evaluated the transaction with a calibrated fraud probability of 0.01 (0.8%), despite the card having a history of three prior confirmed account takeover cases and a new iOS device profile. Step-up authentication was performed, and the cardholder confirmed the transaction as their own (assumed). The verdict is legitimate, and the case was closed without fraud after the cardholder confirmed the purchase.",
     "written_to_graph": true,
     "graph_case_id": "CASE-2016-0005"
   },
@@ -150,6 +150,6 @@
   },
   "stop_reason": "Stopped after the evidence request: the cardholder's confirmation settles the next step under policy section 6 (probability 0.01); further queries would not change the actions.",
   "tool_calls": 13,
-  "tokens": 4099,
-  "latency_s": 10.0
+  "tokens": 4106,
+  "latency_s": 10.7
 }

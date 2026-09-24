@@ -22,7 +22,7 @@
     "customer_id": "C12382",
     "risk_score": "0.61"
    },
-   "elapsed_s": 0.0
+   "elapsed_s": 0.01
   },
   {
    "step": 2,
@@ -32,7 +32,7 @@
    "detail": {
     "graph_case_id": "CASE-2016-0001"
    },
-   "elapsed_s": 0.0
+   "elapsed_s": 0.01
   },
   {
    "step": 3,
@@ -49,10 +49,10 @@
      "customer": 2,
      "customer_cards": 1
     },
-    "latency_s": 0.297,
-    "transport": "restpp"
+    "latency_s": 1.213,
+    "transport": "mcp"
    },
-   "elapsed_s": 0.3
+   "elapsed_s": 1.23
   },
   {
    "step": 4,
@@ -68,10 +68,10 @@
     "result": {
      "rows": 304
     },
-    "latency_s": 0.321,
-    "transport": "restpp"
+    "latency_s": 1.532,
+    "transport": "mcp"
    },
-   "elapsed_s": 0.62
+   "elapsed_s": 2.76
   },
   {
    "step": 5,
@@ -95,10 +95,10 @@
      "first_ts": "2016-07-06 14:47:52",
      "last_ts": "2016-12-04 18:51:28"
     },
-    "latency_s": 0.296,
-    "transport": "restpp"
+    "latency_s": 0.612,
+    "transport": "mcp"
    },
-   "elapsed_s": 0.92
+   "elapsed_s": 3.37
   },
   {
    "step": 6,
@@ -112,10 +112,10 @@
     "result": {
      "rows": 15
     },
-    "latency_s": 0.29,
-    "transport": "restpp"
+    "latency_s": 0.597,
+    "transport": "mcp"
    },
-   "elapsed_s": 1.21
+   "elapsed_s": 3.97
   },
   {
    "step": 7,
@@ -134,10 +134,10 @@
     "result": {
      "rows": 0
     },
-    "latency_s": 0.291,
-    "transport": "restpp"
+    "latency_s": 0.623,
+    "transport": "mcp"
    },
-   "elapsed_s": 1.5
+   "elapsed_s": 4.59
   },
   {
    "step": 8,
@@ -153,10 +153,10 @@
      "connected_closed_cases": 0,
      "agent_cases": 3
     },
-    "latency_s": 0.29,
-    "transport": "restpp"
+    "latency_s": 0.6,
+    "transport": "mcp"
    },
-   "elapsed_s": 1.79
+   "elapsed_s": 5.19
   },
   {
    "step": 9,
@@ -210,8 +210,8 @@
      "ref": "prior_cases",
      "entity_ids": [
       "CC-2964",
-      "CC-1066",
       "CC-3587",
+      "CC-1066",
       "CC-1673"
      ],
      "lr": 1.3,
@@ -220,7 +220,7 @@
      "step": 8
     }
    ],
-   "elapsed_s": 1.8
+   "elapsed_s": 5.19
   },
   {
    "step": 10,
@@ -235,10 +235,10 @@
     "result": {
      "rows": 8
     },
-    "latency_s": 0.292,
-    "transport": "restpp"
+    "latency_s": 0.333,
+    "transport": "mcp"
    },
-   "elapsed_s": 2.09
+   "elapsed_s": 5.52
   },
   {
    "step": 11,
@@ -253,10 +253,10 @@
     "result": {
      "rows": 6
     },
-    "latency_s": 0.428,
-    "transport": "restpp"
+    "latency_s": 0.452,
+    "transport": "mcp"
    },
-   "elapsed_s": 2.52
+   "elapsed_s": 5.98
   },
   {
    "step": 12,
@@ -271,10 +271,10 @@
     "result": {
      "rows": 4
     },
-    "latency_s": 0.294,
-    "transport": "restpp"
+    "latency_s": 0.441,
+    "transport": "mcp"
    },
-   "elapsed_s": 2.82
+   "elapsed_s": 6.42
   },
   {
    "step": 13,
@@ -290,10 +290,10 @@
      "connected_closed_cases": 0,
      "agent_cases": 3
     },
-    "latency_s": 0.295,
-    "transport": "restpp"
+    "latency_s": 0.608,
+    "transport": "mcp"
    },
-   "elapsed_s": 4.14
+   "elapsed_s": 8.03
   },
   {
    "step": 14,
@@ -309,9 +309,9 @@
       }
      }
     ],
-    "notes": "Prior fraud cases for customer C12382 confirm multiple historical compromise events on card C12382-K1 involving out-of-region use and CNP fraud. The current flagged transaction (77.07, in-person, region 444) aligns with the cardholder's home region and shows very low case-memory fraud probability (0.025). The prior frauds demonstrate a vulnerability history, but this specific in-person event lacks anomalous location indicators."
+    "notes": "Prior case lookup confirmed four prior confirmed fraud cases on card C12382-K1, involving out-of-region use and card-not-present activity. The current transaction is in-person ($77.07) within the home billing region 444, where the cardholder has 10 legitimate prior purchases. Case memory and similar agent cases consistently indicate legitimate travel/activity patterns for this profile. The low case-memory fraud rate (1.1%) and home region alignment support legitimacy despite historical fraud."
    },
-   "elapsed_s": 5.62
+   "elapsed_s": 9.74
   },
   {
    "step": 15,
@@ -335,7 +335,7 @@
      "Cardholder has not confirmed or denied the transaction"
     ]
    },
-   "elapsed_s": 5.62
+   "elapsed_s": 9.74
   },
   {
    "step": 16,
@@ -364,7 +364,7 @@
     "why_request": "",
     "policy_check": []
    },
-   "elapsed_s": 5.62
+   "elapsed_s": 9.74
   },
   {
    "step": 17,
@@ -379,7 +379,7 @@
     ],
     "awaiting": []
    },
-   "elapsed_s": 5.62
+   "elapsed_s": 9.74
   },
   {
    "step": 18,
@@ -387,11 +387,11 @@
    "kind": "llm",
    "title": "Case narrative written by gemini-3.5-flash-lite (3/3 fields accepted)",
    "detail": {
-    "summary": "This case was triggered by the real-time model scoring transaction 3514030 in billing region 444.0 at 0.61. The graph and evidence showed a case-memory fraud probability of 0.025 and established that the cardholder profile made 10 earlier card-present purchases in billing region 444. Although the ca",
+    "summary": "The real-time risk model triggered case HHG-001 by scoring transaction 3514030 ($77.07, in billing region 444.0) at 0.61. The graph and case-memory analysis showed a calibrated fraud rate of 1.1% (0.025 score) with the transaction occurring in-person within the home billing region 444, where the car",
     "sar_narrative": "",
     "pattern_description": ""
    },
-   "elapsed_s": 7.44
+   "elapsed_s": 11.44
   },
   {
    "step": 19,
@@ -412,11 +412,26 @@
      ]
     }
    },
-   "elapsed_s": 7.44
+   "elapsed_s": 11.44
   }
+ ],
+ "transport": [
+  "mcp:txn_context:1.21s",
+  "mcp:card_window:1.53s",
+  "mcp:card_profile:0.61s",
+  "mcp:client_history:0.60s",
+  "mcp:peer_txns:0.62s",
+  "mcp:prior_cases:0.60s",
+  "mcp:similar_closed_cases:0.33s",
+  "mcp:similar_agent_cases:0.45s",
+  "mcp:policy_search:0.44s",
+  "mcp:prior_cases:0.61s",
+  "restpp:upsert_case"
  ],
  "llm": {
   "provider": "gemini",
-  "model": "gemini-3.5-flash-lite"
+  "model": "gemini-3.5-flash-lite",
+  "calls": 3,
+  "errors": []
  }
 }

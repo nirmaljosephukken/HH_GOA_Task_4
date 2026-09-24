@@ -71,16 +71,17 @@
         ]
       },
       {
-        "claim": "Earlier agent cases with a similar profile: CASE-2016-0019 (fraud, card_not_present_new_device); CASE-2016-PRO-002 (fraud, card_not_present_new_device)",
+        "claim": "Earlier agent cases with a similar profile: CASE-2016-ADHOC-950 (fraud, card_not_present_new_device); CASE-2016-0019 (fraud, card_not_present_new_device); CASE-2016-ADHOC-988 (fraud, card_not_present_new_device)",
         "source": "graph",
         "ref": "similar_agent_cases",
         "entity_ids": [
+          "CASE-2016-ADHOC-950",
           "CASE-2016-0019",
-          "CASE-2016-PRO-002"
+          "CASE-2016-ADHOC-988"
         ]
       },
       {
-        "claim": "Investigator note (LLM): Device fanout analysis revealed a tightly clustered series of ~59.60-59.71 online transactions across multiple victim accounts using the exact same Windows Edge 16.0 device profile. The cardholder's report of unauthorized use is fully corroborated by historical case memory matching this exact CNP fraud modus operandi. The high memory model score (0.862) and velocity pattern confirm fraudulent compromise. No remaining analytical uncertainty exists regarding the nature of the transaction.",
+        "claim": "Investigator note (LLM): Device fanout confirms a cluster of identical online transactions (~$59.67, Product C) across multiple cards using the same Windows Edge 16.0 device profile within a 48-hour window. Several of these connected transactions received high model risk scores and match known fraud profiles. Card C09988-K1 shows no prior activity in the checked window, supporting the unauthorized status report.",
         "source": "graph",
         "ref": "llm_investigator",
         "entity_ids": [
@@ -95,7 +96,7 @@
       "CC-2269",
       "CC-0853"
     ],
-    "summary": "This case was triggered by customer C09988 reporting an unauthorized online purchase of $59.67 on card C09988-K1 on December 11, 2016. The graph analysis showed a device fanout cluster where the exact same Windows Edge 16.0 device profile was used across multiple victim accounts within 48 hours, including connected cards C00854-K2, C06224-K2, and C09251-K1. The verdict is confirmed fraud with an initial and final fraud probability of 0.99, supported by a case-memory model score of 0.862 and a calibrated fraud rate of 65.1%. The system executed automated actions to create the case and monitor connected cards under rule R6, while card blocking is recommended pending approval under rule R2 and report filing is recommended pending approval under policy 3a and rule R6.",
+    "summary": "This case was triggered by a customer report from C09988 stating they never made a $59.67 purchase on card C09988-K1, referencing transaction 3534820. The graph showed a cluster of identical online transactions across multiple cards using the same Windows Edge 16.0 device profile within a 48-hour window. The verdict is fraud with an initial and final probability of 0.99, supported by historical case-memory data and connected card patterns. The actions taken include creating the case and monitoring connected cards automatically, while blocking the card and filing a report are recommended and pending approval.",
     "written_to_graph": true,
     "graph_case_id": "CASE-2016-0016"
   },
@@ -150,7 +151,7 @@
   "sar": {
     "file": true,
     "reason": "File (policy 3a, R6): fraud confirmed or strongly suspected and the activity connects to a shared device profile or to fraud on other cards.",
-    "narrative": "Customer C09988 reported an unauthorized transaction on card C09988-K1 involving an online purchase of $59.67 that occurred on December 11, 2016 at 22:39:08. The transaction was conducted using a new device profile running Windows and Edge 16.0 with a hotmail.com email address. Investigation revealed that the same device profile was utilized in a tightly clustered series of online transactions across three other cards, specifically C00854-K2, C06224-K2, and C09251-K1, within a 48-hour window. This activity constitutes card-not-present fraud carried out via a shared device profile ring. The total exposure amount for this specific transaction is $59.67. The case-memory model assigned a score of 0.862, reflecting a calibrated fraud rate of 65.1%, and historical precedent confirms that all 4,665 cardholder-reported cases of this type in the bank's memory were confirmed fraud. Automated actions taken include creating the case and monitoring connected cards under rule R6, with card blocking recommended pending approval under rule R2 and report filing recommended pending approval under policy 3a and rule R6.",
+    "narrative": "This Suspicious Activity Report details fraudulent activity involving customer C09988, card C09988-K1, and device profile Windows |  | edge 16.0 |. On 2016-12-11 22:39:08, an online transaction of $59.67 for product C was carried out using a new device for this account. The activity was discovered when the cardholder reported the transaction as unauthorized via message, stating they never made this $59.67 purchase. The incident occurred through the online channel and is suspicious because it connects to a shared device profile and matches a cluster of identical online transactions on 3 other cards, specifically C00854-K2, C06224-K2, and C09251-K1, within a 48-hour window. The total exposure amount is $59.67. Case-memory models gave the transaction a calibrated fraud rate of 65.1% with an initial fraud probability of 0.99. Automatic actions taken include recording the investigation in the graph and monitoring connected cards, while blocking the card and filing a report under policy 3a and rule R6 are recommended and pending approval.",
     "subjects": [
       "C09988",
       "C09988-K1",
@@ -166,7 +167,7 @@
     ]
   },
   "stop_reason": "Stopped under policy section 6: probability 0.99 with at least two independent lines of evidence; further steps would not change the decision.",
-  "tool_calls": 12,
-  "tokens": 6186,
-  "latency_s": 8.8
+  "tool_calls": 13,
+  "tokens": 6416,
+  "latency_s": 12.4
 }

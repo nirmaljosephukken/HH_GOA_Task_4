@@ -7,7 +7,7 @@
   "flagged_txn_id": "3534820",
   "card_id": "C09988-K1",
   "customer_id": "C09988",
-  "risk_score": NaN
+  "risk_score": ""
  },
  "events": [
   {
@@ -20,7 +20,7 @@
     "flagged_txn_id": "3534820",
     "card_id": "C09988-K1",
     "customer_id": "C09988",
-    "risk_score": NaN
+    "risk_score": ""
    },
    "elapsed_s": 0.0
   },
@@ -49,10 +49,10 @@
      "customer": 2,
      "customer_cards": 1
     },
-    "latency_s": 0.265,
-    "transport": "restpp"
+    "latency_s": 0.607,
+    "transport": "mcp"
    },
-   "elapsed_s": 0.27
+   "elapsed_s": 0.61
   },
   {
    "step": 4,
@@ -68,10 +68,10 @@
     "result": {
      "rows": 45
     },
-    "latency_s": 0.261,
-    "transport": "restpp"
+    "latency_s": 0.612,
+    "transport": "mcp"
    },
-   "elapsed_s": 0.53
+   "elapsed_s": 1.22
   },
   {
    "step": 5,
@@ -95,10 +95,10 @@
      "first_ts": "2016-07-06 19:02:49",
      "last_ts": "2016-11-20 21:05:21"
     },
-    "latency_s": 0.256,
-    "transport": "restpp"
+    "latency_s": 0.607,
+    "transport": "mcp"
    },
-   "elapsed_s": 0.79
+   "elapsed_s": 1.82
   },
   {
    "step": 6,
@@ -112,10 +112,10 @@
     "result": {
      "rows": 1
     },
-    "latency_s": 0.258,
-    "transport": "restpp"
+    "latency_s": 0.609,
+    "transport": "mcp"
    },
-   "elapsed_s": 1.04
+   "elapsed_s": 2.43
   },
   {
    "step": 7,
@@ -132,10 +132,10 @@
      "device": 2,
      "txns": 74
     },
-    "latency_s": 0.268,
-    "transport": "restpp"
+    "latency_s": 0.616,
+    "transport": "mcp"
    },
-   "elapsed_s": 1.31
+   "elapsed_s": 3.05
   },
   {
    "step": 8,
@@ -154,10 +154,10 @@
     "result": {
      "rows": 40
     },
-    "latency_s": 0.274,
-    "transport": "restpp"
+    "latency_s": 0.631,
+    "transport": "mcp"
    },
-   "elapsed_s": 1.59
+   "elapsed_s": 3.68
   },
   {
    "step": 9,
@@ -173,10 +173,10 @@
      "connected_closed_cases": 0,
      "agent_cases": 1
     },
-    "latency_s": 0.255,
-    "transport": "restpp"
+    "latency_s": 0.608,
+    "transport": "mcp"
    },
-   "elapsed_s": 1.85
+   "elapsed_s": 4.29
   },
   {
    "step": 10,
@@ -239,7 +239,7 @@
      "step": 9
     }
    ],
-   "elapsed_s": 1.85
+   "elapsed_s": 4.29
   },
   {
    "step": 11,
@@ -254,10 +254,10 @@
     "result": {
      "rows": 8
     },
-    "latency_s": 0.268,
-    "transport": "restpp"
+    "latency_s": 0.314,
+    "transport": "mcp"
    },
-   "elapsed_s": 2.12
+   "elapsed_s": 4.61
   },
   {
    "step": 12,
@@ -272,10 +272,10 @@
     "result": {
      "rows": 6
     },
-    "latency_s": 0.523,
-    "transport": "restpp"
+    "latency_s": 0.402,
+    "transport": "mcp"
    },
-   "elapsed_s": 2.64
+   "elapsed_s": 5.01
   },
   {
    "step": 13,
@@ -290,54 +290,81 @@
     "result": {
      "rows": 4
     },
-    "latency_s": 0.254,
-    "transport": "restpp"
+    "latency_s": 0.304,
+    "transport": "mcp"
    },
-   "elapsed_s": 2.9
+   "elapsed_s": 5.31
   },
   {
    "step": 14,
    "ts": "2016-12-12 01:46:08",
    "kind": "tool",
-   "title": "llm:device_fanout(device=Windows |  | edge 16.0 | , t0=2016-12-09 22:39:08, t1=2016-12-11 23:39:08)",
+   "title": "llm:device_fanout(device=Windows |  | edge 16.0 | , t0=2016-12-09 22:39:08, t1=2016-12-11 22:39:08)",
    "detail": {
     "args": {
      "device": "Windows |  | edge 16.0 | ",
      "t0": "2016-12-09 22:39:08",
-     "t1": "2016-12-11 23:39:08"
+     "t1": "2016-12-11 22:39:08"
     },
     "result": {
      "device": 2,
      "txns": 16
     },
-    "latency_s": 0.258,
-    "transport": "restpp"
+    "latency_s": 0.609,
+    "transport": "mcp"
    },
-   "elapsed_s": 4.13
+   "elapsed_s": 7.09
   },
   {
    "step": 15,
    "ts": "2016-12-12 01:46:38",
+   "kind": "tool",
+   "title": "llm:card_window(card_id=C09988-K1, t0=2016-12-01 00:00:00, t1=2016-12-11 23:59:59)",
+   "detail": {
+    "args": {
+     "card_id": "C09988-K1",
+     "t0": "2016-12-01 00:00:00",
+     "t1": "2016-12-11 23:59:59"
+    },
+    "result": {
+     "rows": 1
+    },
+    "latency_s": 0.603,
+    "transport": "mcp"
+   },
+   "elapsed_s": 7.69
+  },
+  {
+   "step": 16,
+   "ts": "2016-12-12 01:47:08",
    "kind": "llm",
-   "title": "LLM investigator (gemini-3.5-flash-lite): 1 extra tool call(s)",
+   "title": "LLM investigator (gemini-3.5-flash-lite): 2 extra tool call(s)",
    "detail": {
     "calls": [
      {
       "tool": "device_fanout",
       "args": {
        "t0": "2016-12-09 22:39:08",
-       "t1": "2016-12-11 23:39:08",
+       "t1": "2016-12-11 22:39:08",
        "device": "Windows |  | edge 16.0 | "
+      }
+     },
+     {
+      "tool": "card_window",
+      "args": {
+       "t1": "2016-12-11 23:59:59",
+       "card_id": "C09988-K1",
+       "t0": "2016-12-01 00:00:00"
       }
      }
     ],
-    "notes": "Device fanout analysis revealed a tightly clustered series of ~59.60-59.71 online transactions across multiple victim accounts using the exact same Windows Edge 16.0 device profile. The cardholder's report of unauthorized use is fully corroborated by historical case memory matching this exact CNP fraud modus operandi. The high memory model score (0.862) and velocity pattern confirm fraudulent compromise. No remaining analytical uncertainty exists regarding the nature of the transaction."
+    "notes": "Device fanout confirms a cluster of identical online transactions (~$59.67, Product C) across multiple cards using the same Windows Edge 16.0 device profile within a 48-hour window. Several of these connected transactions received high model risk scores and match known fraud profiles. Card C09988-K1 shows no prior activity in the checked window, supporting the unauthorized status report."
    },
-   "elapsed_s": 5.54
+   "elapsed_s": 9.34
   },
   {
-   "step": 16,
-   "ts": "2016-12-12 01:47:08",
+   "step": 17,
+   "ts": "2016-12-12 01:47:38",
    "kind": "assess",
    "title": "Fraud probability 0.99 (memory-model prior 0.65); confidence high; hypothesis card_not_present_new_device; exposure $59.67",
    "detail": {
@@ -360,11 +387,11 @@
      "Device ownership not established (new device for this account)"
     ]
    },
-   "elapsed_s": 5.54
+   "elapsed_s": 9.34
   },
   {
-   "step": 17,
-   "ts": "2016-12-12 01:47:38",
+   "step": 18,
+   "ts": "2016-12-12 01:48:08",
    "kind": "decision",
    "title": "Initial next best action: BLOCK_CARD, CREATE_CASE, FILE_REPORT, MONITOR_CONNECTED_CARDS",
    "detail": {
@@ -394,11 +421,11 @@
     "why_request": "",
     "policy_check": []
    },
-   "elapsed_s": 5.54
+   "elapsed_s": 9.34
   },
   {
-   "step": 18,
-   "ts": "2016-12-12 01:48:08",
+   "step": 19,
+   "ts": "2016-12-12 01:48:38",
    "kind": "execute",
    "title": "Executed 2 auto action(s); 2 queued for approval",
    "detail": {
@@ -411,23 +438,23 @@
      "FILE_REPORT (L2)"
     ]
    },
-   "elapsed_s": 5.54
-  },
-  {
-   "step": 19,
-   "ts": "2016-12-12 01:48:38",
-   "kind": "llm",
-   "title": "Case narrative written by gemini-3.5-flash-lite (3/3 fields accepted)",
-   "detail": {
-    "summary": "This case was triggered by customer C09988 reporting an unauthorized online purchase of $59.67 on card C09988-K1 on December 11, 2016. The graph analysis showed a device fanout cluster where the exact same Windows Edge 16.0 device profile was used across multiple victim accounts within 48 hours, inc",
-    "sar_narrative": "Customer C09988 reported an unauthorized transaction on card C09988-K1 involving an online purchase of $59.67 that occurred on December 11, 2016 at 22:39:08. The transaction was conducted using a new device profile running Windows and Edge 16.0 with a hotmail.com email address. Investigation reveale",
-    "pattern_description": ""
-   },
-   "elapsed_s": 8.47
+   "elapsed_s": 9.34
   },
   {
    "step": 20,
    "ts": "2016-12-12 01:49:08",
+   "kind": "llm",
+   "title": "Case narrative written by gemini-3.5-flash-lite (3/3 fields accepted)",
+   "detail": {
+    "summary": "This case was triggered by a customer report from C09988 stating they never made a $59.67 purchase on card C09988-K1, referencing transaction 3534820. The graph showed a cluster of identical online transactions across multiple cards using the same Windows Edge 16.0 device profile within a 48-hour wi",
+    "sar_narrative": "This Suspicious Activity Report details fraudulent activity involving customer C09988, card C09988-K1, and device profile Windows |  | edge 16.0 |. On 2016-12-11 22:39:08, an online transaction of $59.67 for product C was carried out using a new device for this account. The activity was discovered w",
+    "pattern_description": ""
+   },
+   "elapsed_s": 12.13
+  },
+  {
+   "step": 21,
+   "ts": "2016-12-12 01:49:38",
    "kind": "memory",
    "title": "Case CASE-2016-0016 written to case memory (closed_fraud, fraud, card_not_present_new_device)",
    "detail": {
@@ -444,11 +471,63 @@
      ]
     }
    },
-   "elapsed_s": 8.48
+   "elapsed_s": 12.13
   }
+ ],
+ "transport": [
+  "mcp:txn_context:1.21s",
+  "mcp:card_window:1.53s",
+  "mcp:card_profile:0.61s",
+  "mcp:client_history:0.60s",
+  "mcp:peer_txns:0.62s",
+  "mcp:prior_cases:0.60s",
+  "mcp:similar_closed_cases:0.33s",
+  "mcp:similar_agent_cases:0.45s",
+  "mcp:policy_search:0.44s",
+  "mcp:prior_cases:0.61s",
+  "restpp:upsert_case",
+  "mcp:txn_context:0.61s",
+  "mcp:card_window:0.61s",
+  "mcp:card_profile:0.60s",
+  "mcp:client_history:0.61s",
+  "mcp:device_fanout:0.61s",
+  "mcp:device_cases:0.61s",
+  "mcp:peer_txns:0.61s",
+  "mcp:prior_cases:0.61s",
+  "mcp:similar_closed_cases:0.43s",
+  "mcp:similar_agent_cases:0.42s",
+  "mcp:policy_search:0.31s",
+  "mcp:prior_cases:0.61s",
+  "restpp:upsert_case",
+  "mcp:txn_context:0.61s",
+  "mcp:card_window:0.99s",
+  "mcp:card_profile:0.61s",
+  "mcp:client_history:0.61s",
+  "mcp:peer_txns:0.61s",
+  "mcp:prior_cases:0.65s",
+  "mcp:similar_closed_cases:0.34s",
+  "mcp:similar_agent_cases:0.33s",
+  "mcp:policy_search:0.37s",
+  "mcp:prior_cases:0.61s",
+  "restpp:upsert_case",
+  "mcp:txn_context:0.61s",
+  "mcp:card_window:0.61s",
+  "mcp:card_profile:0.61s",
+  "mcp:client_history:0.61s",
+  "mcp:device_fanout:0.61s",
+  "mcp:peer_txns:0.63s",
+  "mcp:prior_cases:0.61s",
+  "mcp:similar_closed_cases:0.31s",
+  "mcp:similar_agent_cases:0.40s",
+  "mcp:policy_search:0.30s",
+  "mcp:device_fanout:0.61s",
+  "mcp:card_window:0.60s",
+  "restpp:upsert_case"
  ],
  "llm": {
   "provider": "gemini",
-  "model": "gemini-3.5-flash-lite"
+  "model": "gemini-3.5-flash-lite",
+  "calls": 3,
+  "errors": []
  }
 }

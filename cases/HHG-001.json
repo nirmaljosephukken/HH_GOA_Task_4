@@ -46,8 +46,8 @@
         "ref": "prior_cases",
         "entity_ids": [
           "CC-2964",
-          "CC-1066",
           "CC-3587",
+          "CC-1066",
           "CC-1673"
         ]
       },
@@ -74,7 +74,7 @@
         ]
       },
       {
-        "claim": "Investigator note (LLM): Prior fraud cases for customer C12382 confirm multiple historical compromise events on card C12382-K1 involving out-of-region use and CNP fraud. The current flagged transaction (77.07, in-person, region 444) aligns with the cardholder's home region and shows very low case-memory fraud probability (0.025). The prior frauds demonstrate a vulnerability history, but this specific in-person event lacks anomalous location indicators.",
+        "claim": "Investigator note (LLM): Prior case lookup confirmed four prior confirmed fraud cases on card C12382-K1, involving out-of-region use and card-not-present activity. The current transaction is in-person ($77.07) within the home billing region 444, where the cardholder has 10 legitimate prior purchases. Case memory and similar agent cases consistently indicate legitimate travel/activity patterns for this profile. The low case-memory fraud rate (1.1%) and home region alignment support legitimacy despite historical fraud.",
         "source": "graph",
         "ref": "llm_investigator",
         "entity_ids": [
@@ -89,7 +89,7 @@
       "CC-1365",
       "CC-1259"
     ],
-    "summary": "This case was triggered by the real-time model scoring transaction 3514030 in billing region 444.0 at 0.61. The graph and evidence showed a case-memory fraud probability of 0.025 and established that the cardholder profile made 10 earlier card-present purchases in billing region 444. Although the card has 4 earlier confirmed fraud case(s), this specific in-person event aligns with the cardholder's home region and lacks anomalous location indicators. The verdict is legitimate and the status is closed_legitimate under Policy 6, as the probability is <= 0.15 on two independent lines of evidence. No further action is required.",
+    "summary": "The real-time risk model triggered case HHG-001 by scoring transaction 3514030 ($77.07, in billing region 444.0) at 0.61. The graph and case-memory analysis showed a calibrated fraud rate of 1.1% (0.025 score) with the transaction occurring in-person within the home billing region 444, where the cardholder previously made 10 legitimate purchases. Despite four earlier historical fraud cases on the card resulting in reissues, the current in-person activity and matching home region alignment indicated a legitimate transaction. The case-memory model and similar prior investigations consistently pointed to legitimate patterns. The verdict is legitimate and the case was closed as closed_legitimate under Policy 6, automatically allowing the transaction, generating an internal report, and closing with no fraud.",
     "written_to_graph": true,
     "graph_case_id": "CASE-2016-0001"
   },
@@ -141,6 +141,6 @@
   },
   "stop_reason": "Stopped under policy section 6: probability 0.01 with at least two independent lines of evidence; further steps would not change the decision.",
   "tool_calls": 11,
-  "tokens": 4018,
-  "latency_s": 7.8
+  "tokens": 4062,
+  "latency_s": 12.0
 }
