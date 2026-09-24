@@ -2,7 +2,7 @@
 
 ## LinkedIn
 
-For TigerGraph × Hacker House Goa I built an AI agent that investigates card fraud from end to end on @TigerGraphDB.
+For TigerGraph × Hacker House Goa I built an AI agent that investigates card fraud from end to end on @TigerGraphDB, for the @247pmstudio Hacker House Goa 2026 TigerGraph task.
 
 The bank's risk score is a reason to look, never a verdict. In this bank's own history, all 900 alerts raised by the score alone turned out to be false alarms. So the agent works like a careful analyst:
 
@@ -23,4 +23,4 @@ Blog: <link> · Demo: <link> · Code: <link>
 
 ## X (280 chars)
 
-Built an AI fraud-investigation agent on @TigerGraphDB for #HackerHouseGoa: GSQL + MCP tools, GraphRAG over 5.6k closed cases, explicit uncertainty, policy-routed next best actions. It found a 28-card device ring and a just-under-$500 structuring scheme. <link>
+Built an AI fraud-investigation agent on @TigerGraphDB for @247pmstudio #HackerHouseGoa: GSQL + MCP tools, GraphRAG over 5.6k closed cases, explicit uncertainty, policy-routed next best actions. It found a 28-card device ring and a just-under-$500 structuring scheme. <link>

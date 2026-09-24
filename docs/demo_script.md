@@ -1,59 +1,77 @@
-# Demo video script (about 4 minutes)
+# Demo video script (target 3:50, hard limit 5:00)
 
-**Before you record**
-1. Open the TigerGraph Savanna console and check the workspace is running (resume it if it is asleep).
-2. In the project folder, activate the venv and start the console: `python -m streamlit run ui/app.py`.
-3. Open http://localhost:8501 full screen. Keep a second tab on Savanna (GraphStudio) for the last shot.
-4. Do one warm-up run (any case) so TigerGraph and Gemini are awake. If a live run feels slow on camera, switch **LLM investigator** off: the decision is identical and a run takes about 10 seconds.
+Built around the judging criteria: next best action under uncertainty (25%), investigation accuracy (25%), agentic design (15%), innovation (15%), explainability (10%), demo quality (10%). The live part leads with the uncertain case, because that's what the brief is about.
+
+## Before you press record (10 min)
+
+1. Savanna console: workspace shows **Active**.
+2. PowerShell, in the project folder with the venv active: `python -m streamlit run ui/app.py`
+3. Browser full screen at 90% zoom. Tabs open: **(1)** SentinelGraph, **(2)** Savanna GraphStudio (Explore Graph on FraudGraph).
+4. Warm-up: run any case once so TigerGraph and Gemini are awake, then click **Investigate** to reset.
+5. Close notifications. Recorder: Win+Alt+R (Xbox Game Bar) or OBS, mic on.
+6. Keep this script on your phone. Speak slowly; pauses are fine.
 
 ---
 
-**[0:00 to 0:25] The problem** (Case Portfolio page)
-> "Fraud teams get thousands of alerts and the risk score is wrong in both directions. In this bank's own history, all 900 alerts raised by the score alone were false alarms. SentinelGraph is an agent that works an alert like a careful analyst: it gathers evidence from a graph, says what it doesn't know, asks for the evidence that would settle it, and recommends an action someone can defend under policy."
+## 0:00 to 0:15 · Intro (Investigate page, empty "Ready to investigate" screen)
+> "Hi, I'm Nirmal Joseph, and this is SentinelGraph, my submission for the TigerGraph Agentic Fraud Investigation task at Hacker House Goa 2026. It's an AI agent that investigates fraud alerts on TigerGraph and recommends the next best action, even when the signals are uncertain."
 
-Show the portfolio: 20 cases, 10 legitimate, 9 fraud, 1 uncertain, 6 SARs.
+## 0:15 to 0:40 · The problem and the approach (stay on the same screen)
+> "In this bank's own history, every one of the 900 alerts raised by the risk score alone was a false alarm. So the score is a reason to look, not a verdict. The agent works like a careful analyst: it pulls evidence from the graph, says what it doesn't know, asks for the one piece of evidence that would settle it, and only then recommends an action, with the right person approving it."
 
-**[0:25 to 0:50] Architecture** (README diagram or blog)
-> "TigerGraph Savanna holds three layers: the transaction graph with a latent-cardholder vertex, the case memory of 5,565 closed cases plus every case the agent opens, and the policy knowledge, all with native vector embeddings. The agent calls 16 installed GSQL queries through the official TigerGraph MCP server. A deterministic policy engine makes the decisions. The LLM only probes and writes, and its text is checked."
+## 0:40 to 1:55 · LIVE: an uncertain case, HHG-003
+Pick **HHG-003** in the alert box. Point at the alert text.
+> "A customer says they never made this $49 purchase."
 
-**[0:50 to 2:00] Live run: HHG-019** (Investigate page)
-Pick HHG-019 in the alert box. Point at the empty "Ready to investigate" screen.
-> "This is the alert as it arrives: a $99.92 online payment the bank model scored 0.90."
+Click **Run investigation**. While the steps stream in:
+> "Each line is a GSQL query through the TigerGraph MCP server, about a tenth of a second each: the card's history, the device, other cards, and similar closed cases through vector search."
 
-Click **Run investigation**. While steps stream in:
-> "Every line is a graph query through MCP, about a tenth of a second each."
+When it finishes, point at the green **Live run** bar.
+> "That was live, and the case is now written back into TigerGraph."
 
-When it finishes, point at the green **Live run** bar and the **Compared with the previous run** strip.
-> "This was run just now and written back into the graph. The outcome matches the previous run: same evidence, same decision. Only the wording changes."
+Point at the four cards across the top.
+> "What happened, what the agent found, how certain it is, and what happens next."
 
-Walk the four cards at the top:
-> "What happened, what the agent found, how certain it is, and what happens next: block and reissue the card, with a team lead approving."
+Scroll to **Decision evolution**.
+> "At first look the graph evidence says normal use: probability about 17%. That's not enough to block someone's card, so the agent's first recommendation was to verify with the customer. The customer confirms they didn't make it, which moves it to 63%. The recommendation updates: block the card to protect the customer."
 
-Scroll to **Evidence sufficiency**:
-> "Two independent lines of evidence agree and the probability is past 85%, so policy section 6 says stop. That's why the agent didn't ask the customer."
+Scroll up to **Why the agent handed over?**.
+> "But the denial and the graph still disagree, so the agent doesn't fake confidence. It marks the case uncertain and escalates to an analyst, as the policy says."
 
-Scroll to the **Investigation graph**:
-> "On its own card this looks like an ordinary new-device purchase. The graph shows the same rare device on four other cards within days, all scored as likely fraud by our case-memory model. That model has an AUC of 0.91 against 0.87 for the bank's score."
+Point at the **Next best action** panel: action hierarchy and governance.
+> "Opening the case runs automatically. Blocking the card needs a team lead."
 
-Back at the **Next best action** panel, click **Approve** on BLOCK_CARD.
-> "Auto actions ran already. Blocking waits for a human, and the approval is written into the case's audit trail in TigerGraph."
+Click **Approve** on BLOCK_CARD.
+> "The approval is written into the case's audit trail in the graph."
 
-**[2:00 to 2:40] Asking for evidence: HHG-003** (Case Portfolio → HHG-003)
-Open HHG-003 from the portfolio (it opens as a **Saved investigation**).
-> "A customer says they never made a $49 purchase. The graph says the card uses that region all the time. The agent asked the customer to confirm, and the Decision evolution shows the probability move from 17% to 63%. The evidence still conflicts, so it blocks the card to protect the customer but hands the final call to an analyst. It's honest about doubt instead of faking confidence."
+## 1:55 to 2:45 · Fraud the card view can't see: HHG-019
+Sidebar **Case Portfolio**, then click **HHG-019** (opens as a Saved investigation).
+> "Here's the portfolio: 20 alerts, 10 legitimate, 9 fraud, 1 uncertain. HHG-019 is a $99.92 online purchase that looks ordinary on its own card."
 
-Point at **Why the agent handed over?**.
+Scroll to the **Investigation graph**.
+> "The graph shows the same rare device on four other cards within days, all with near-identical amounts and high scores from our case-memory model. That model is trained on the bank's closed cases and beats the bank's own score: AUC 0.91 against 0.87."
 
-**[2:40 to 3:20] Finding what nobody reported** (Alert Queue → Proactive tab, then a custom alert)
-> "The agent also scans the graph on its own: device rings, just-under-$500 bursts, and connected components."
+Scroll up to **Why the agent stopped?**.
+> "Two independent lines of evidence agree above 85%, so the agent stops and acts: block the card, monitor the four connected cards, and file a suspicious activity report for the fraud manager to approve."
 
-Open **Custom alert**, enter transaction **3475414**, trigger **analyst_request**, and run it.
-> "Four purchases in half an hour, each just under $500. The graph finds the same pattern on 11 other cards. It isn't one of the documented patterns, so the agent labels it undocumented, files a SAR and escalates."
+Click the **Suspicious activity report** tab for two seconds.
 
-**[3:20 to 3:40] Knowledge and memory** (Policies page)
-Type "when may the agent block a card without approval?"
-> "The policy is stored as vectors in TigerGraph. GraphRAG pulls the clause the agent cites: blocking always needs L1 or L2."
+## 2:45 to 3:15 · Finding fraud nobody reported (custom alert)
+Back to **Investigate**. Switch **LLM investigator** off (faster on camera). Open **Custom alert**: transaction **3475414**, trigger **analyst_request**, then click **Investigate custom alert**.
+> "The agent also scans the graph on its own. This alert came from that scan: four purchases in half an hour, each just under $500. The graph finds the same pattern on 11 other cards, and case memory matches it to undocumented September cases. It's not one of the five known patterns, so the agent labels it undocumented, files a report and escalates."
 
-**[3:40 to 4:00] Close** (Savanna tab)
-Show the `FraudCase` vertices with their FC_TXN, FC_CARD and FC_EVENT edges.
-> "Every case is written back into TigerGraph, so the next investigation finds it by graph adjacency and by vector similarity. The code, the 20 answer files and full traces are in the repo."
+## 3:15 to 3:35 · Memory and policy grounding (Policies page)
+Sidebar **Policies**, then type *when may the agent block a card without approval?*
+> "The fraud policy lives in TigerGraph as vectors too. This is the GraphRAG context the LLM gets: the exact clause, not raw data. And the answer is never: blocking always needs a human."
+
+## 3:35 to 3:55 · Close (Savanna tab)
+Show the `FraudCase` vertices with their edges to transactions, cards and events.
+> "Every case goes back into TigerGraph as memory, linked to its transactions, cards and decisions, so the next investigation can find it. Same evidence, same decision: all 20 answers reproduce exactly. The code, the answer files and the full traces are on GitHub. Thanks for watching."
+
+---
+
+## If something goes wrong while recording
+- **A run hangs for more than 20 seconds:** switch LLM investigator off and run again. Don't restart the recording.
+- **"TigerGraph unreachable":** the workspace is waking up. Wait a minute, reload, continue.
+- **You stumble on a line:** pause, then repeat the sentence. You can trim it later, or just leave it.
+- **Running long:** cut the Policies section (3:15 to 3:35) first.
