@@ -1,0 +1,268 @@
+{
+  "case_id": "PRO-002",
+  "case": {
+    "status": "closed_fraud",
+    "verdict": "fraud",
+    "fraud_probability": 0.99,
+    "pattern": "card_not_present_new_device",
+    "pattern_description": "",
+    "affected_txn_ids": [
+      "3434595"
+    ],
+    "first_suspicious_txn_id": "3434595",
+    "connected_card_ids": [
+      "C00294-K2",
+      "C01155-K2",
+      "C01521-K2",
+      "C04386-K1",
+      "C05031-K2",
+      "C05381-K2",
+      "C05572-K1",
+      "C06630-K2",
+      "C07508-K2",
+      "C07562-K2",
+      "C09657-K2",
+      "C10837-K2",
+      "C11444-K1",
+      "C11595-K1",
+      "C11787-K1",
+      "C11807-K1",
+      "C11844-K2",
+      "C11847-K2",
+      "C12028-K2",
+      "C13254-K2",
+      "C13364-K1"
+    ],
+    "connected_device_profiles": [
+      "SM-A300H Build/LRX22G |  | chrome 65.0 for android | "
+    ],
+    "exposure_usd": 46.02,
+    "evidence": [
+      {
+        "claim": "Fraud analyst asked for a review of related activity",
+        "source": "external",
+        "ref": "trigger:analyst_request",
+        "entity_ids": [
+          "3434595"
+        ]
+      },
+      {
+        "claim": "Case-memory model (trained on the bank's closed cases, AUC 0.91 on an October hold-out vs 0.87 for the bank score) gives this transaction 0.583, a calibrated fraud rate of 43.9%",
+        "source": "graph",
+        "ref": "txn.model_score",
+        "entity_ids": [
+          "3434595"
+        ]
+      },
+      {
+        "claim": "Identity record marks the device as New for this account",
+        "source": "graph",
+        "ref": "txn_context",
+        "entity_ids": [
+          "3434595"
+        ]
+      },
+      {
+        "claim": "Shared device: profile 'SM-A300H Build/LRX22G |  | chrome 65.0 for android | ' (only 54 uses in the whole dataset) was used on 21 other card(s) within +-10 days: high memory-model scores on 18 of those cards; linked to 10 confirmed closed case(s)",
+        "source": "graph",
+        "ref": "device_fanout",
+        "entity_ids": [
+          "SM-A300H Build/LRX22G |  | chrome 65.0 for android | ",
+          "C00294-K2",
+          "C01155-K2",
+          "C01521-K2",
+          "C04386-K1",
+          "C05031-K2",
+          "C05381-K2",
+          "C05572-K1",
+          "C06630-K2",
+          "C07508-K2",
+          "C07562-K2",
+          "C09657-K2",
+          "C10837-K2",
+          "C11444-K1",
+          "C11595-K1",
+          "C11787-K1",
+          "C11807-K1",
+          "C11844-K2",
+          "C11847-K2",
+          "C12028-K2",
+          "C13254-K2",
+          "C13364-K1"
+        ]
+      },
+      {
+        "claim": "Case memory: this device profile is on confirmed closed case(s) CC-5322, CC-5536, CC-5339, CC-5404, CC-5491, CC-5399",
+        "source": "graph",
+        "ref": "device_cases",
+        "entity_ids": [
+          "CC-5322",
+          "CC-5536",
+          "CC-5339",
+          "CC-5404",
+          "CC-5491",
+          "CC-5399"
+        ]
+      },
+      {
+        "claim": "What happened on other cards: 7 transaction(s) on 3 other card(s) (C01521-K2, C09657-K2, C13364-K1) within 48h at the same amount (+-1.5%), same product code and shared device profile, each scored >= 0.5 by the memory model",
+        "source": "graph",
+        "ref": "peer_txns",
+        "entity_ids": [
+          "3437536",
+          "3437614",
+          "3437625",
+          "3437639",
+          "3437645",
+          "3437647",
+          "3438055",
+          "C01521-K2",
+          "C09657-K2",
+          "C13364-K1"
+        ]
+      },
+      {
+        "claim": "Product code C never used before on this card",
+        "source": "graph",
+        "ref": "card_profile",
+        "entity_ids": [
+          "C13001-K1"
+        ]
+      },
+      {
+        "claim": "Card has 1 earlier confirmed fraud case(s) (out_of_region_use), most recent 2016-10-13; the card was reissued each time, so this is context, not proof",
+        "source": "graph",
+        "ref": "prior_cases",
+        "entity_ids": [
+          "CC-4776"
+        ]
+      },
+      {
+        "claim": "Card also has 1 cleared alert(s) (e.g. Case CC-0096: model scored a $2,000.97 transaction at 0.89. Cardholder confirmed travel to)",
+        "source": "graph",
+        "ref": "prior_cases",
+        "entity_ids": [
+          "CC-0096"
+        ]
+      },
+      {
+        "claim": "Case memory: similar prior investigations retrieved - CC-5322 (confirmed_fraud, card_not_present_new_device, $22.37): Case CC-5322: cardholder C12028 reported unrecognized activity on card C12028-K2. 1 transaction(s) between 201; CC-5536 (confirmed_fraud, card_not_present_fraud, $109.39): Case CC-5536: cardholder C08962 reported unrecognized activity on card C08962-K2. 5 transaction(s) between 201; CC-5339 (confirmed_fraud, card_not_present_new_device, $3,047.13): Case CC-5339: cardholder C07562 reported unrecognized activity on card C07562-K2. 68 transaction(s) between 20",
+        "source": "graph",
+        "ref": "similar_closed_cases + prior_cases + device_cases",
+        "entity_ids": [
+          "CC-5322",
+          "CC-5536",
+          "CC-5339",
+          "CC-5404",
+          "CC-5416"
+        ]
+      },
+      {
+        "claim": "Investigator note (LLM): The device fan-out lookup confirmed intensive multi-card activity originating from the same mobile browser profile within a 48-hour window, matching identical low-dollar amounts (~$22 and ~$46). Several of these associated transactions carry very high memory model scores and align with known confirmed fraud cases. The target card shows a new device status, an unprecedented product code usage, and previous fraud history. Remaining uncertainty centers on whether the cardholder authorized any of these micro-purchases or if compromised credentials drove the entire cluster.",
+        "source": "graph",
+        "ref": "llm_investigator",
+        "entity_ids": [
+          "3434595"
+        ]
+      }
+    ],
+    "similar_prior_cases": [
+      "CC-5322",
+      "CC-5536",
+      "CC-5339",
+      "CC-5404",
+      "CC-5416"
+    ],
+    "summary": "This case was triggered by an analyst request monitoring a device profile used across 18 cards in November and December. The graph analysis revealed that the device profile was linked to intensive multi-card activity, shared with 21 other cards, and connected to 10 confirmed closed fraud cases. The verdict is fraud due to high memory-model scores, a new device status, and historical connections to known fraud rings. Next steps include blocking the card (pending approval), monitoring connected cards, and filing a regulatory report (pending approval).",
+    "written_to_graph": true,
+    "graph_case_id": "CASE-2016-PRO-002"
+  },
+  "evidence_requests": [],
+  "next_best_actions": {
+    "initial": [
+      {
+        "action": "BLOCK_CARD",
+        "route": "L1",
+        "reason": "Fraud probability >= 0.85 on two or more independent lines of evidence (policy 6); exposure $46.02 <= $2,500 -> L1"
+      },
+      {
+        "action": "CREATE_CASE",
+        "route": "auto",
+        "reason": "Policy 3a: record the investigation and write it to the graph"
+      },
+      {
+        "action": "FILE_REPORT",
+        "route": "L2",
+        "reason": "policy 3a, R6: fraud confirmed or strongly suspected and the activity connects to a shared device profile or to fraud on other cards"
+      },
+      {
+        "action": "MONITOR_CONNECTED_CARDS",
+        "route": "auto",
+        "reason": "R6: 21 other card(s) share the device/ring"
+      }
+    ],
+    "final": [
+      {
+        "action": "BLOCK_CARD",
+        "route": "L1",
+        "reason": "Fraud probability >= 0.85 on two or more independent lines of evidence (policy 6); exposure $46.02 <= $2,500 -> L1"
+      },
+      {
+        "action": "CREATE_CASE",
+        "route": "auto",
+        "reason": "Policy 3a: record the investigation and write it to the graph"
+      },
+      {
+        "action": "FILE_REPORT",
+        "route": "L2",
+        "reason": "policy 3a, R6: fraud confirmed or strongly suspected and the activity connects to a shared device profile or to fraud on other cards"
+      },
+      {
+        "action": "MONITOR_CONNECTED_CARDS",
+        "route": "auto",
+        "reason": "R6: 21 other card(s) share the device/ring"
+      }
+    ],
+    "what_changed": "nothing"
+  },
+  "sar": {
+    "file": true,
+    "reason": "File (policy 3a, R6): fraud confirmed or strongly suspected and the activity connects to a shared device profile or to fraud on other cards.",
+    "narrative": "This Suspicious Activity Report details fraudulent activity associated with customer C13001 using card C13001-K1. On 2016-11-06 at 03:58:01, an online transaction of $46.02 for product C was conducted using a new device profile, SM-A300H Build/LRX22G |  | chrome 65.0 for android |. The channel used was online. The activity occurred while utilizing a mobile browser profile that was tracked across 22 cards between 2016-10-28 and 2016-11-11 with high memory-model scores and links to 10 confirmed closed fraud cases. This is suspicious because the device profile fan-out lookup confirmed intensive multi-card activity within a 48-hour window matching identical low-dollar amounts, combined with an unprecedented product code usage and previous fraud history on the card. The total exposure amount is $46.02. Automated actions taken include creating the case and monitoring connected cards. Recommended actions awaiting human approval include blocking the card under policy 6 and filing a report under policy 3a and rule R6 due to confirmed or strongly suspected fraud connected to a shared device profile.",
+    "subjects": [
+      "C13001",
+      "C13001-K1",
+      "C00294-K2",
+      "C01155-K2",
+      "C01521-K2",
+      "C04386-K1",
+      "C05031-K2",
+      "C05381-K2",
+      "C05572-K1",
+      "C06630-K2",
+      "C07508-K2",
+      "C07562-K2",
+      "C09657-K2",
+      "C10837-K2",
+      "C11444-K1",
+      "C11595-K1",
+      "C11787-K1",
+      "C11807-K1",
+      "C11844-K2",
+      "C11847-K2",
+      "C12028-K2",
+      "C13254-K2",
+      "C13364-K1",
+      "SM-A300H Build/LRX22G |  | chrome 65.0 for android | "
+    ],
+    "total_amount_usd": 46.02,
+    "activity_dates": [
+      "2016-11-06",
+      "2016-11-06"
+    ]
+  },
+  "stop_reason": "Stopped under policy section 6: probability 0.99 with at least two independent lines of evidence; further steps would not change the decision.",
+  "tool_calls": 13,
+  "tokens": 7760,
+  "latency_s": 6.6
+}

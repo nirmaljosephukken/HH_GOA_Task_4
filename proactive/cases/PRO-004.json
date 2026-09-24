@@ -1,0 +1,204 @@
+{
+  "case_id": "PRO-004",
+  "case": {
+    "status": "closed_fraud",
+    "verdict": "fraud",
+    "fraud_probability": 0.99,
+    "pattern": "card_not_present_new_device",
+    "pattern_description": "",
+    "affected_txn_ids": [
+      "3527057"
+    ],
+    "first_suspicious_txn_id": "3527057",
+    "connected_card_ids": [
+      "C05381-K2",
+      "C06744-K2",
+      "C06793-K1",
+      "C06940-K1",
+      "C07220-K1",
+      "C07562-K2",
+      "C09657-K2",
+      "C10837-K2",
+      "C13171-K2"
+    ],
+    "connected_device_profiles": [
+      "MotoG3 Build/MPIS24.65-33.1-2-16 |  | chrome 66.0 for android | "
+    ],
+    "exposure_usd": 14.31,
+    "evidence": [
+      {
+        "claim": "Fraud analyst asked for a review of related activity",
+        "source": "external",
+        "ref": "trigger:analyst_request",
+        "entity_ids": [
+          "3527057"
+        ]
+      },
+      {
+        "claim": "Case-memory model (trained on the bank's closed cases, AUC 0.91 on an October hold-out vs 0.87 for the bank score) gives this transaction 0.975, a calibrated fraud rate of 70.9%",
+        "source": "graph",
+        "ref": "txn.model_score",
+        "entity_ids": [
+          "3527057"
+        ]
+      },
+      {
+        "claim": "Shared device: profile 'MotoG3 Build/MPIS24.65-33.1-2-16 |  | chrome 66.0 for android | ' (only 27 uses in the whole dataset) was used on 9 other card(s) within +-10 days: high memory-model scores on 4 of those cards",
+        "source": "graph",
+        "ref": "device_fanout",
+        "entity_ids": [
+          "MotoG3 Build/MPIS24.65-33.1-2-16 |  | chrome 66.0 for android | ",
+          "C05381-K2",
+          "C06744-K2",
+          "C06793-K1",
+          "C06940-K1",
+          "C07220-K1",
+          "C07562-K2",
+          "C09657-K2",
+          "C10837-K2",
+          "C13171-K2"
+        ]
+      },
+      {
+        "claim": "What happened on other cards: 1 transaction(s) on 1 other card(s) (C09657-K2) within 48h at the same amount (+-1.5%), same product code and shared device profile, each scored >= 0.5 by the memory model",
+        "source": "graph",
+        "ref": "peer_txns",
+        "entity_ids": [
+          "3527061",
+          "C09657-K2"
+        ]
+      },
+      {
+        "claim": "Card has 13 earlier confirmed fraud case(s) (card_not_present_fraud, card_not_present_new_device), most recent 2016-10-31; the card was reissued each time, so this is context, not proof",
+        "source": "graph",
+        "ref": "prior_cases",
+        "entity_ids": [
+          "CC-2398",
+          "CC-5526",
+          "CC-1038",
+          "CC-4657"
+        ]
+      },
+      {
+        "claim": "Card also has 1 cleared alert(s) (e.g. Case CC-0239: model scored a $180.46 transaction at 0.86. Cardholder confirmed travel to t)",
+        "source": "graph",
+        "ref": "prior_cases",
+        "entity_ids": [
+          "CC-0239"
+        ]
+      },
+      {
+        "claim": "Case memory: similar prior investigations retrieved - CC-5526 (confirmed_fraud, card_not_present_fraud, $127.59): Case CC-5526: cardholder C13364 reported unrecognized activity on card C13364-K1. 1 transaction(s) between 201; CC-4837 (confirmed_fraud, card_not_present_fraud, $39.30): Case CC-4837: cardholder C13364 reported unrecognized activity on card C13364-K1. 1 transaction(s) between 201; CC-3768 (confirmed_fraud, card_not_present_fraud, $195.40): Case CC-3768: cardholder C13364 reported unrecognized activity on card C13364-K1. 4 transaction(s) between 201",
+        "source": "graph",
+        "ref": "similar_closed_cases + prior_cases + device_cases",
+        "entity_ids": [
+          "CC-5526",
+          "CC-4837",
+          "CC-3768",
+          "CC-1154",
+          "CC-4268"
+        ]
+      },
+      {
+        "claim": "Earlier agent cases with a similar profile: CASE-2016-PRO-005 (fraud, card_not_present_new_device)",
+        "source": "graph",
+        "ref": "similar_agent_cases",
+        "entity_ids": [
+          "CASE-2016-PRO-005"
+        ]
+      },
+      {
+        "claim": "Investigator note (LLM): Device fanout showed the shared MotoG3 profile was used on multiple other cards around the same time with similarly high memory model scores (e.g., C05381-K2, C07562-K2, and C09657-K2). Card C09657-K2's window confirmed a matching low-amount online transaction ($14.32) scored at 0.98. These lookups reinforce a cross-card fraudulent testing pattern using the MotoG3 device profile. Remaining uncertainty centers on whether the legitimate cardholder is compromised or if these are entirely synthetic profile attacks.",
+        "source": "graph",
+        "ref": "llm_investigator",
+        "entity_ids": [
+          "3527057"
+        ]
+      }
+    ],
+    "similar_prior_cases": [
+      "CC-4941",
+      "CC-4657",
+      "CC-1181"
+    ],
+    "summary": "This case was triggered by an analyst request monitoring device profile MotoG3 Build/MPIS24.65-33.1-2-16 |  | chrome 66.0 for android | used on 17 cards in Nov-Dec. The graph and investigation revealed that this device profile was shared across 9 other cards within plus or minus 10 days, showing high memory-model scores and a cross-card fraudulent testing pattern. The final verdict is fraud with an initial and final fraud probability of 0.99, because the activity connects to a shared device profile and matches fraud on other cards. For next steps, the system automatically created the case and monitored connected cards, while card blocking is recommended at L1 and reporting is recommended at L2 pending human approval.",
+    "written_to_graph": true,
+    "graph_case_id": "CASE-2016-PRO-004"
+  },
+  "evidence_requests": [],
+  "next_best_actions": {
+    "initial": [
+      {
+        "action": "BLOCK_CARD",
+        "route": "L1",
+        "reason": "Fraud probability >= 0.85 on two or more independent lines of evidence (policy 6); exposure $14.31 <= $2,500 -> L1"
+      },
+      {
+        "action": "CREATE_CASE",
+        "route": "auto",
+        "reason": "Policy 3a: record the investigation and write it to the graph"
+      },
+      {
+        "action": "FILE_REPORT",
+        "route": "L2",
+        "reason": "policy 3a, R6: fraud confirmed or strongly suspected and the activity connects to a shared device profile or to fraud on other cards"
+      },
+      {
+        "action": "MONITOR_CONNECTED_CARDS",
+        "route": "auto",
+        "reason": "R6: 9 other card(s) share the device/ring"
+      }
+    ],
+    "final": [
+      {
+        "action": "BLOCK_CARD",
+        "route": "L1",
+        "reason": "Fraud probability >= 0.85 on two or more independent lines of evidence (policy 6); exposure $14.31 <= $2,500 -> L1"
+      },
+      {
+        "action": "CREATE_CASE",
+        "route": "auto",
+        "reason": "Policy 3a: record the investigation and write it to the graph"
+      },
+      {
+        "action": "FILE_REPORT",
+        "route": "L2",
+        "reason": "policy 3a, R6: fraud confirmed or strongly suspected and the activity connects to a shared device profile or to fraud on other cards"
+      },
+      {
+        "action": "MONITOR_CONNECTED_CARDS",
+        "route": "auto",
+        "reason": "R6: 9 other card(s) share the device/ring"
+      }
+    ],
+    "what_changed": "nothing"
+  },
+  "sar": {
+    "file": true,
+    "reason": "File (policy 3a, R6): fraud confirmed or strongly suspected and the activity connects to a shared device profile or to fraud on other cards.",
+    "narrative": "This suspicious activity report details fraudulent transactions involving customer C13364 and card C13364-K1. The activity took place online on 2016-12-09, specifically flagging transaction ID 3527057 for the amount of $14.31. The fraud was carried out using the online channel and the device profile MotoG3 Build/MPIS24.65-33.1-2-16 |  | chrome 66.0 for android |. It is suspicious because the same device profile was used across 10 cards between 2016-12-09 and 2016-12-18, indicating a cross-card fraudulent testing pattern linked to a shared device ring. The total exposure amount for the flagged transaction is $14.31. Regarding actions taken, the system automatically created the case and monitored connected cards, while card blocking and report filing have been routed for review.",
+    "subjects": [
+      "C13364",
+      "C13364-K1",
+      "C05381-K2",
+      "C06744-K2",
+      "C06793-K1",
+      "C06940-K1",
+      "C07220-K1",
+      "C07562-K2",
+      "C09657-K2",
+      "C10837-K2",
+      "C13171-K2",
+      "MotoG3 Build/MPIS24.65-33.1-2-16 |  | chrome 66.0 for android | "
+    ],
+    "total_amount_usd": 14.31,
+    "activity_dates": [
+      "2016-12-09",
+      "2016-12-09"
+    ]
+  },
+  "stop_reason": "Stopped under policy section 6: probability 0.99 with at least two independent lines of evidence; further steps would not change the decision.",
+  "tool_calls": 14,
+  "tokens": 8384,
+  "latency_s": 27.2
+}

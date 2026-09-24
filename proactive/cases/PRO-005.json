@@ -1,0 +1,212 @@
+{
+  "case_id": "PRO-005",
+  "case": {
+    "status": "escalated",
+    "verdict": "fraud",
+    "fraud_probability": 0.97,
+    "pattern": "undocumented",
+    "pattern_description": "This undocumented pattern involves a shared-device ring where multiple transactions are structured to stay just under $500 within a short timeframe across connected cards. It affects various customers and cards within the network and was found through graph monitoring and case-memory model analysis tracking recurring device profiles and structuring intervals.",
+    "affected_txn_ids": [
+      "3475403",
+      "3475405",
+      "3475408",
+      "3475414"
+    ],
+    "first_suspicious_txn_id": "3475403",
+    "connected_card_ids": [
+      "C00466-K1",
+      "C01890-K1",
+      "C02265-K1",
+      "C03633-K1",
+      "C05423-K1",
+      "C05766-K1",
+      "C06881-K1",
+      "C07297-K1",
+      "C10751-K1",
+      "C10990-K1",
+      "C12641-K2"
+    ],
+    "connected_device_profiles": [],
+    "exposure_usd": 1911.84,
+    "evidence": [
+      {
+        "claim": "Fraud analyst asked for a review of related activity",
+        "source": "external",
+        "ref": "trigger:analyst_request",
+        "entity_ids": [
+          "3475414"
+        ]
+      },
+      {
+        "claim": "Case-memory model (trained on the bank's closed cases, AUC 0.91 on an October hold-out vs 0.87 for the bank score) gives this transaction 0.107, a calibrated fraud rate of 10.9%",
+        "source": "graph",
+        "ref": "txn.model_score",
+        "entity_ids": [
+          "3475414"
+        ]
+      },
+      {
+        "claim": "Threshold structuring: 4 online purchases within 30 minutes, each just under $500 ($459.27, $496.35, $468.22, $488.00), total $1,911.84. Amounts vary, so this is not one product bought repeatedly; they appear chosen to stay under a $500 threshold",
+        "source": "graph",
+        "ref": "card_window(structuring)",
+        "entity_ids": [
+          "3475403",
+          "3475405",
+          "3475408",
+          "3475414"
+        ]
+      },
+      {
+        "claim": "The same structuring pattern appears on 11 other cards in the surrounding 30 days (C00466-K1, C01890-K1, C02265-K1, C03633-K1, C05423-K1, C05766-K1...): coordinated, repeated abuse across customers",
+        "source": "graph",
+        "ref": "amount_band_scan(440,500)",
+        "entity_ids": [
+          "C00466-K1",
+          "C01890-K1",
+          "C02265-K1",
+          "C03633-K1",
+          "C05423-K1",
+          "C05766-K1",
+          "C06881-K1",
+          "C07297-K1",
+          "C10751-K1",
+          "C10990-K1",
+          "C12641-K2"
+        ]
+      },
+      {
+        "claim": "Device profile 'C6743 Build/LMY47V | Android 5.1.1 | android browser 4.0 | 960x540' already used 4 times on this card",
+        "source": "graph",
+        "ref": "card_profile",
+        "entity_ids": [
+          "C05851-K1"
+        ]
+      },
+      {
+        "claim": "Case memory: similar prior investigations retrieved - CC-4124 (confirmed_fraud, undocumented, $1,922.37): Case CC-4124: cardholder C02838 reported four online purchases within forty minutes, each just under $500, non; CC-3841 (confirmed_fraud, undocumented, $1,899.30): Case CC-3841: cardholder C01099 reported four online purchases within forty minutes, each just under $500, non; CC-3748 (confirmed_fraud, undocumented, $1,905.21): Case CC-3748: cardholder C12267 reported four online purchases within forty minutes, each just under $500, non",
+        "source": "graph",
+        "ref": "similar_closed_cases + prior_cases + device_cases",
+        "entity_ids": [
+          "CC-4124",
+          "CC-3841",
+          "CC-3748",
+          "CC-4086",
+          "CC-3907"
+        ]
+      },
+      {
+        "claim": "Earlier agent cases with a similar profile: CASE-2016-PRO-001 (fraud, undocumented)",
+        "source": "graph",
+        "ref": "similar_agent_cases",
+        "entity_ids": [
+          "CASE-2016-PRO-001"
+        ]
+      },
+      {
+        "claim": "Investigator note (LLM): Device fan-out confirmed the exact device profile was used exclusively for the four structured transactions on card C05851-K1 within a 30-minute window. Customer C05851 has no prior cases on file. The pattern aligns with undocumented scheme 1 (shared-device ring) identified across multiple connected cards. Remaining uncertainty centers on whether the customer compromised their credentials or participated in the ring.",
+        "source": "graph",
+        "ref": "llm_investigator",
+        "entity_ids": [
+          "3475414"
+        ]
+      }
+    ],
+    "similar_prior_cases": [
+      "CC-4124",
+      "CC-3841",
+      "CC-3748",
+      "CC-4086",
+      "CC-3907"
+    ],
+    "summary": "This case was triggered by monitoring that detected four just-under-$500 online purchases on card C05851-K1 totalling $1,911.84 within an hour. The graph and network analysis revealed that the same structuring pattern appeared on 11 other cards in the surrounding 30 days, indicating coordinated, repeated abuse across customers using a shared device profile. The verdict is fraud with an initial and final fraud probability of 0.97, as the activity aligns with undocumented scheme 1 (shared-device ring). The case has been escalated to an analyst, and actions include blocking the card (recommended, pending approval) and filing a report (recommended, pending approval).",
+    "written_to_graph": true,
+    "graph_case_id": "CASE-2016-PRO-005"
+  },
+  "evidence_requests": [],
+  "next_best_actions": {
+    "initial": [
+      {
+        "action": "BLOCK_CARD",
+        "route": "L1",
+        "reason": "Fraud probability >= 0.85 on two or more independent lines of evidence (policy 6); exposure $1,911.84 <= $2,500 -> L1"
+      },
+      {
+        "action": "CREATE_CASE",
+        "route": "auto",
+        "reason": "Policy 3a: record the investigation and write it to the graph"
+      },
+      {
+        "action": "FILE_REPORT",
+        "route": "L2",
+        "reason": "policy 3a, R6, R9: fraud confirmed or strongly suspected and exposure $1,911.84 exceeds $1,000; the activity connects to a shared device profile or to fraud on other cards; the pattern is coordinated and undocumented (R9)"
+      },
+      {
+        "action": "MONITOR_CONNECTED_CARDS",
+        "route": "auto",
+        "reason": "R6: 11 other card(s) share the device/ring"
+      },
+      {
+        "action": "ESCALATE_TO_ANALYST",
+        "route": "auto",
+        "reason": "R9: undocumented coordinated pattern, analyst review of the wider scheme"
+      }
+    ],
+    "final": [
+      {
+        "action": "BLOCK_CARD",
+        "route": "L1",
+        "reason": "Fraud probability >= 0.85 on two or more independent lines of evidence (policy 6); exposure $1,911.84 <= $2,500 -> L1"
+      },
+      {
+        "action": "CREATE_CASE",
+        "route": "auto",
+        "reason": "Policy 3a: record the investigation and write it to the graph"
+      },
+      {
+        "action": "FILE_REPORT",
+        "route": "L2",
+        "reason": "policy 3a, R6, R9: fraud confirmed or strongly suspected and exposure $1,911.84 exceeds $1,000; the activity connects to a shared device profile or to fraud on other cards; the pattern is coordinated and undocumented (R9)"
+      },
+      {
+        "action": "MONITOR_CONNECTED_CARDS",
+        "route": "auto",
+        "reason": "R6: 11 other card(s) share the device/ring"
+      },
+      {
+        "action": "ESCALATE_TO_ANALYST",
+        "route": "auto",
+        "reason": "R9: undocumented coordinated pattern, analyst review of the wider scheme"
+      }
+    ],
+    "what_changed": "nothing"
+  },
+  "sar": {
+    "file": true,
+    "reason": "File (policy 3a, R6, R9): fraud confirmed or strongly suspected and exposure $1,911.84 exceeds $1,000; the activity connects to a shared device profile or to fraud on other cards; the pattern is coordinated and undocumented (R9).",
+    "narrative": "This suspicious activity report details fraudulent online transactions conducted using card C05851-K1 issued to customer C05851. On 2016-11-21 between 10:00:00 and 10:30:00, four online purchases were executed via the online channel using device profile C6743 Build/LMY47V | Android 5.1.1 | android browser 4.0 | 960x540. The transactions were structured to stay just under the $500 threshold, with amounts of $459.27, $496.35, $468.22, and $488.00, totaling $1,911.84. This activity is highly suspicious because the varying amounts were clearly chosen to evade thresholds, and the exact device profile was used exclusively for these structured transactions. Furthermore, the same structuring pattern appears on 11 other cards (C00466-K1, C01890-K1, C02265-K1, C03633-K1, C05423-K1, C05766-K1, C06881-K1, C07297-K1, C10751-K1, C10990-K1, and C12641-K2) in the surrounding 30 days, pointing to a coordinated shared-device ring. The total exposure amounts to $1,911.84. Initial and final fraud probabilities were assessed at 0.97. Actions taken include automatic case creation, automatic escalation to an analyst under policy R9 for an undocumented coordinated pattern, automatic monitoring of connected cards under policy R6, a recommended and pending approval action to block the card under policy 6, and a recommended and pending approval action to file a report under policy 3a, R6, and R9.",
+    "subjects": [
+      "C05851",
+      "C05851-K1",
+      "C00466-K1",
+      "C01890-K1",
+      "C02265-K1",
+      "C03633-K1",
+      "C05423-K1",
+      "C05766-K1",
+      "C06881-K1",
+      "C07297-K1",
+      "C10751-K1",
+      "C10990-K1",
+      "C12641-K2"
+    ],
+    "total_amount_usd": 1911.84,
+    "activity_dates": [
+      "2016-11-21",
+      "2016-11-21"
+    ]
+  },
+  "stop_reason": "Stopped under policy section 6: probability 0.97 with at least two independent lines of evidence; further steps would not change the decision.",
+  "tool_calls": 15,
+  "tokens": 8499,
+  "latency_s": 10.4
+}
