@@ -120,7 +120,9 @@ def build(case: dict, answer: dict, events: list) -> View:
     rs = (trig.get("detail") or {}).get("risk_score")
     try:
         v.bank_score = float(rs) if rs not in (None, "") else None
-    except ValueError:
+        if v.bank_score is not None and math.isnan(v.bank_score):
+            v.bank_score = None
+    except (TypeError, ValueError):
         v.bank_score = None
     verdict = answer["case"]["verdict"]
     fdir = "fraud" if verdict == "fraud" else ("legit" if verdict == "legitimate" else None)
