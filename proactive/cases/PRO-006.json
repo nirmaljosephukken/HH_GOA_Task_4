@@ -5,7 +5,7 @@
     "verdict": "fraud",
     "fraud_probability": 0.98,
     "pattern": "undocumented",
-    "pattern_description": "The undocumented pattern involves threshold structuring where multiple online purchases (typically four transactions within a short timeframe) are executed just under $500 each to bypass automated controls, totaling around $1,900 across a single card session. It affects customer accounts by draining available credit through rapid, multi-merchant or multi-item online bursts using new or generic device profiles. This pattern was found through fraud monitoring rules detecting rapid clusters of high-amount transactions and graph analysis connecting identical structuring behavior across multiple unrelated cards.",
+    "pattern_description": "The undocumented pattern consists of a burst of four online purchases completed within an hour, each strategically valued just under $500, indicating deliberate threshold structuring to evade automated controls. It affects multiple customers across different cards and was found through transaction monitoring and graph analysis linking cards by amount and timing without shared devices.",
     "affected_txn_ids": [
       "3475933",
       "3475959",
@@ -103,16 +103,15 @@
         ]
       },
       {
-        "claim": "Earlier agent cases with a similar profile: CASE-2016-PRO-005 (fraud, undocumented); CASE-2016-PRO-001 (fraud, undocumented)",
+        "claim": "Earlier agent cases with a similar profile: CASE-2016-PRO-005 (fraud, undocumented)",
         "source": "graph",
         "ref": "similar_agent_cases",
         "entity_ids": [
-          "CASE-2016-PRO-005",
-          "CASE-2016-PRO-001"
+          "CASE-2016-PRO-005"
         ]
       },
       {
-        "claim": "Investigator note (LLM): Device fanout showed thousands of generic Chrome 64.0 transactions across many unrelated cards, indicating a common browser signature rather than a specific malicious device fingerprint. The lookup confirms the device profile lacks specificity to isolate the ring. Uncertainty remains regarding whether the connected customer cards share additional IP or merchant vectors beyond this generic browser string.",
+        "claim": "Investigator note (LLM): The device profile `chrome 64.0` is generic, handling widespread benign traffic and failing to isolate specific fraud rings. The transaction exhibits strong threshold-structuring indicators ($496.06 just under $500) and aligns with known coordinated abuse patterns. Low model score (0.055) creates minor friction, but transaction behavior and connected card activity strongly support fraud.",
         "source": "graph",
         "ref": "llm_investigator",
         "entity_ids": [
@@ -127,7 +126,7 @@
       "CC-3748",
       "CC-3907"
     ],
-    "summary": "This case was triggered by monitoring that detected four just-under-$500 online purchases on card C10990-K1 totaling $1,926.93 within an hour. The graph and network analysis revealed the same structuring pattern appearing on 11 other cards in the surrounding 30 days, indicating coordinated, repeated abuse. The final verdict is fraud with an initial and final fraud probability of 0.98, supported by threshold structuring and historical case matches. Recommended actions include blocking the card (pending approval) and filing a report (pending approval), alongside automated monitoring of connected cards and analyst escalation.",
+    "summary": "This case was triggered by an analyst request monitoring four online purchases totalling $1,926.93 on card C10990-K1 within an hour on 2016-11-21. The graph analysis revealed the same structuring pattern on 11 other cards in the surrounding 30 days, linked by amount and timing only, with no shared device. The verdict is fraud with an initial and final fraud probability of 0.98, supported by threshold structuring indicators and similar prior confirmed fraud cases. Actions taken include an automatically created case, monitoring connected cards, escalating to an analyst, a recommended L1 block card action pending approval, and a recommended L2 file report action pending approval.",
     "written_to_graph": true,
     "graph_case_id": "CASE-2016-PRO-006"
   },
@@ -147,12 +146,12 @@
       {
         "action": "FILE_REPORT",
         "route": "L2",
-        "reason": "policy 3a, R6, R9: fraud confirmed or strongly suspected and exposure $1,926.93 exceeds $1,000; the activity connects to a shared device profile or to fraud on other cards; the pattern is coordinated and undocumented (R9)"
+        "reason": "policy 3a, R6, R9: fraud confirmed or strongly suspected and exposure $1,926.93 exceeds $1,000; the activity is linked to fraud on 11 other card(s) (11 via same just-under-$500 structuring pattern, linked by amount and timing only); the pattern is coordinated and undocumented (R9)"
       },
       {
         "action": "MONITOR_CONNECTED_CARDS",
         "route": "auto",
-        "reason": "R6: 11 other card(s) share the device/ring"
+        "reason": "R6: 11 other card(s) are linked to this activity (11 via same just-under-$500 structuring pattern, linked by amount and timing only)"
       },
       {
         "action": "ESCALATE_TO_ANALYST",
@@ -174,12 +173,12 @@
       {
         "action": "FILE_REPORT",
         "route": "L2",
-        "reason": "policy 3a, R6, R9: fraud confirmed or strongly suspected and exposure $1,926.93 exceeds $1,000; the activity connects to a shared device profile or to fraud on other cards; the pattern is coordinated and undocumented (R9)"
+        "reason": "policy 3a, R6, R9: fraud confirmed or strongly suspected and exposure $1,926.93 exceeds $1,000; the activity is linked to fraud on 11 other card(s) (11 via same just-under-$500 structuring pattern, linked by amount and timing only); the pattern is coordinated and undocumented (R9)"
       },
       {
         "action": "MONITOR_CONNECTED_CARDS",
         "route": "auto",
-        "reason": "R6: 11 other card(s) share the device/ring"
+        "reason": "R6: 11 other card(s) are linked to this activity (11 via same just-under-$500 structuring pattern, linked by amount and timing only)"
       },
       {
         "action": "ESCALATE_TO_ANALYST",
@@ -191,8 +190,8 @@
   },
   "sar": {
     "file": true,
-    "reason": "File (policy 3a, R6, R9): fraud confirmed or strongly suspected and exposure $1,926.93 exceeds $1,000; the activity connects to a shared device profile or to fraud on other cards; the pattern is coordinated and undocumented (R9).",
-    "narrative": "Customer C10990 and card C10990-K1 were subjected to coordinated fraudulent activity on 2016-11-21 via the online channel. The scheme involved four online purchases executed within 24 minutes, specifically transactions 3475933 ($477.19), 3475959 ($484.81), 3475998 ($468.87), and 3476008 ($496.06), totaling $1,926.93. The transactions were carried out using a new device profile for this account and featured amounts intentionally kept just under a $500 threshold. This activity is highly suspicious because the total exposure of $1,926.93 well exceeds the card's normal spending patterns, and the exact same structuring pattern was identified on 11 other cards in the surrounding 30 days, including C00466-K1, C01890-K1, C02265-K1, C03633-K1, C05423-K1, C05766-K1, C05851-K1, C06881-K1, C07297-K1, C10751-K1, and C12641-K2. Actions taken include creating an investigation case automatically, monitoring connected cards automatically, escalating to an analyst automatically, and recommending actions to block the card (L1) and file a regulatory report (L2).",
+    "reason": "File (policy 3a, R6, R9): fraud confirmed or strongly suspected and exposure $1,926.93 exceeds $1,000; the activity is linked to fraud on 11 other card(s) (11 via same just-under-$500 structuring pattern, linked by amount and timing only); the pattern is coordinated and undocumented (R9).",
+    "narrative": "This Suspicious Activity Report details fraudulent online activity involving customer C10990 and card C10990-K1 using a new device with email domain web.de in billing region . On 2016-11-21 between 16:00:00 and 16:24:00, four online purchases were executed in an online channel totaling $1,926.93 ($477.19, $484.81, $468.87, and $496.06). Each transaction was kept just under the $500 threshold within a 24-minute window. This behavior is highly suspicious as the amount $496.06 is well above the card's 90th percentile of $121.60, and identical structuring patterns were identified across 11 other cards (C00466-K1, C01890-K1, C02265-K1, C03633-K1, C05423-K1, C05766-K1, C05851-K1, C06881-K1, C07297-K1, C10751-K1, and C12641-K2) within the surrounding 30 days. The total exposure amounts to $1,926.93. Automated and manual actions were initiated pursuant to policies 3a, R6, and R9, including creating the case (auto), monitoring connected cards (auto), escalating to an analyst (auto), recommending a card block under policy 6 (L1, pending approval), and recommending filing a suspicious activity report due to the coordinated undocumented pattern exceeding $1,000 (L2, pending approval). How the 11 connected card(s) are linked: 11 card(s) show the same structuring pattern (a burst of just-under-$500 online purchases within an hour); the link is amount and timing only. None of them shares a device profile with this card.",
     "subjects": [
       "C10990",
       "C10990-K1",
@@ -216,6 +215,6 @@
   },
   "stop_reason": "Stopped under policy section 6: probability 0.98 with at least two independent lines of evidence; further steps would not change the decision.",
   "tool_calls": 13,
-  "tokens": 8063,
-  "latency_s": 11.3
+  "tokens": 8486,
+  "latency_s": 7.4
 }

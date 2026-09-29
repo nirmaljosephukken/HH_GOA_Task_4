@@ -20,6 +20,7 @@ from agent import policy, signals as S
 from agent.backends import GraphBackend
 from agent.embeddings import amount_band, embed
 from agent.llm import LLM, foreign_ids
+from agent.linkage import kinds_of, link_statement, link_summary, unsupported_link_claims
 from agent.simulator import simulate
 
 PATTERN_TEXT = {
@@ -192,7 +193,7 @@ class Investigation:
             shared_origin=bool(f.connected_cards) and ("device_ring" in f.flags or "peer_cluster" in f.flags
                                                        or "structuring_network" in f.flags),
             coordinated_undocumented=(pattern == "undocumented" and bool(f.connected_cards or f.flags.get("device_ring"))),
-            connected_cards=len(f.connected_cards),
+            connected_cards=len(f.connected_cards), link_summary=link_summary(f.links),
             flagged_pending=(trig == "risk_score"), online=(x["channel"] == "online"))
         initial = policy.decide(sit)
         self.log("decision", f"Initial next best action: {', '.join(a['action'] for a in initial.actions)}",
@@ -253,6 +254,8 @@ class Investigation:
             "affected_txns": [{k: episode[t][k] for k in ("id", "ts", "amount", "channel", "device_profile", "card_id")}
                               for t in affected],
             "connected_cards": {k: f.connected_cards[k] for k in conn_cards},
+            "how_cards_are_linked": link_statement({k: f.links.get(k, set()) for k in conn_cards}),
+            "link_kinds": sorted(kinds_of({k: f.links.get(k, set()) for k in conn_cards})),
             "connected_devices": {k: f.connected_devices[k] for k in conn_devs},
             "evidence": [e.claim for e in evs], "similar_prior_cases": similar_ids,
             "initial_actions": initial.actions, "final_actions": final.actions,
@@ -269,7 +272,10 @@ class Investigation:
         if final.sar:
             dates = sorted(episode[t]["ts"][:10] for t in affected)
             subjects = [x["customer_id"], x["card_id"]] + conn_cards + conn_devs
-            sar.update({"narrative": text.get("sar_narrative") or self._sar_template(facts, dates),
+            narrative = text.get("sar_narrative") or self._sar_template(facts, dates)
+            if facts["how_cards_are_linked"] and facts["how_cards_are_linked"] not in narrative:
+                narrative = narrative.rstrip() + " " + facts["how_cards_are_linked"]
+            sar.update({"narrative": narrative,
                         "subjects": list(dict.fromkeys(subjects)), "total_amount_usd": exposure_out,
                         "activity_dates": [dates[0], dates[-1]] if dates else []})
 
@@ -464,7 +470,10 @@ class Investigation:
                   "markdown. Cite policy rule numbers where given. Actions routed L1 or L2 are RECOMMENDED and await "
                   "human approval (say 'recommended' / 'pending approval'); only 'auto' actions were executed. Replies in "
                   "evidence_request are simulated assumptions - say 'assumed' when you mention them. Billing regions are "
-                  "anonymised codes; call them 'billing region <code>'.")
+                  "anonymised codes; call them 'billing region <code>'. Never explain HOW other cards are linked in your "
+                  "own words: the field how_cards_are_linked is the only allowed explanation (it is appended to the "
+                  "report automatically). Do not call anything a ring, a device-sharing scheme or a shared device unless "
+                  "link_kinds contains shared_device or peer_device; the flagged card's own device is not a shared device.")
         prompt = ("Write these fields as a JSON object:\n"
                   "summary: 2-6 sentences an analyst can read: what triggered the case, what the graph showed, the verdict "
                   "and why, and what happens next.\n"
@@ -486,6 +495,11 @@ class Investigation:
             if bad:
                 self.log("guardrail", f"LLM text for '{k}' rejected: unknown IDs {bad[:5]}; template used", None)
                 continue
+            wrong = unsupported_link_claims(v, set(facts["link_kinds"]))
+            if wrong:
+                self.log("guardrail", f"LLM text for '{k}' rejected: claims a link the evidence does not show "
+                                      f"{wrong[:4]}; template used", None)
+                continue
             clean[k] = v.strip()
         if out:
             self.log("llm", f"Case narrative written by {self.llm.model} ({len(clean)}/{len(out)} fields accepted)",
@@ -505,7 +519,7 @@ class Investigation:
             s += (f"Assessed as {F['pattern'].replace('_', ' ')} with fraud probability {F['fraud_probability_final']:.2f}; "
                   f"{len(F['affected_txns'])} transaction(s) totalling ${F['exposure_usd']:,.2f} are in the episode. ")
             if F["connected_cards"]:
-                s += f"{len(F['connected_cards'])} connected card(s) share the same origin and are under monitoring. "
+                s += f"{F['how_cards_are_linked']} They are under monitoring. "
         else:
             s += f"Evidence remains inconclusive (probability {F['fraud_probability_final']:.2f}); the case stays under review. "
         s += "Final actions: " + ", ".join(a["action"] for a in F["final_actions"]) + "."
@@ -523,8 +537,7 @@ class Investigation:
         s += [e for e in F["evidence"] if any(k in e for k in ("Threshold", "Shared device", "What happened", "Card-testing",
                                                                "Burst", "Card-present use"))][:3]
         if cards:
-            s.append(f"The same origin links {len(cards)} other card(s): {', '.join(cards[:12])}"
-                     + ("..." if len(cards) > 12 else "") + ".")
+            s.append(f"Connected cards: {', '.join(cards[:12])}" + ("..." if len(cards) > 12 else "") + ".")
         s.append(f"The pattern is assessed as {F['pattern'].replace('_', ' ')}.")
         s.append("It is suspicious because the activity departs from the cardholder's established behaviour and matches a "
                  "known or coordinated fraud typology, as documented in the case evidence.")
@@ -537,7 +550,8 @@ class Investigation:
             return (f"Threshold structuring: a burst of online purchases within about {st['minutes']} minutes, each just under "
                     f"$500 (total ${st['total']:,.2f}), apparently sized to stay under a $500 authorisation threshold. It "
                     f"recurs on {len(f.flags.get('structuring_network', []))} other cards with the same timing and amount "
-                    f"band, and was found by scanning the graph for just-under-$500 clusters.")
+                    f"band (no shared device links them), and was found by scanning the graph for just-under-$500 "
+                    f"clusters.")
         if "device_ring" in f.flags:
             r = f.flags["device_ring"]
             return (f"Device-sharing ring: one device profile ('{r['device']}') is used across {len(r['cards']) + 1} unrelated "

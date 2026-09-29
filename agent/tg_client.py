@@ -60,9 +60,16 @@ class TGClient:
             return self._token
         if self.s.tg_secret:
             self.wait_until_awake()
-            r = self.http.post(f"{self.base}/gsql/v1/tokens",
-                               json={"secret": self.s.tg_secret, "graph": self.graph, "lifetime": "604800"},
-                               timeout=60)
+            import time
+            t0 = time.time()
+            while True:  # the GSQL service can still be starting after /api/ping answers
+                r = self.http.post(f"{self.base}/gsql/v1/tokens",
+                                   json={"secret": self.s.tg_secret, "graph": self.graph, "lifetime": "604800"},
+                                   timeout=60)
+                if not (r.status_code in (502, 503, 504) or "Starting workspace" in r.text) or time.time() - t0 > 240:
+                    break
+                print("[tigergraph] GSQL service is starting, waiting 10s ...", flush=True)
+                time.sleep(10)
             if r.status_code == 404:  # graph not created yet: global token
                 r = self.http.post(f"{self.base}/gsql/v1/tokens",
                                    json={"secret": self.s.tg_secret, "lifetime": "604800"}, timeout=60)

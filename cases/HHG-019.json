@@ -73,9 +73,9 @@
         "source": "graph",
         "ref": "prior_cases",
         "entity_ids": [
-          "CC-5026",
           "CC-2011",
-          "CC-2860"
+          "CC-2860",
+          "CC-5026"
         ]
       },
       {
@@ -99,7 +99,15 @@
         ]
       },
       {
-        "claim": "Investigator note (LLM): Device fanout confirms the rare browser profile was used across five distinct cards in a tight six-day window for nearly identical micro-amounts (~$100). All four related transactions on C11309-K1, C06224-K2, C01983-K1, and C01104-K2 scored above 0.89 on the case-memory model. This tight clustering strongly indicates automated card-testing or a credential-stuffing script using a spoofed user-agent string. Remaining uncertainty relates strictly to whether these specific charges have already been disputed by the respective cardholders.",
+        "claim": "Earlier agent cases with a similar profile: CASE-2016-ADHOC-950 (fraud, card_not_present_new_device)",
+        "source": "graph",
+        "ref": "similar_agent_cases",
+        "entity_ids": [
+          "CASE-2016-ADHOC-950"
+        ]
+      },
+      {
+        "claim": "Investigator note (LLM): Device fan-out confirmed clustered ~$100 online transactions across multiple cards using the identical new device profile with high memory-model scores ($0.87-0.99$). The target card has a history of repeated fraud compromises and reissues. Case-memory and pattern evidence strongly indicate coordinated card-not-present testing or skimming attacks. Uncertainty remains minimal given the distinctive recurring transaction structure and shared device footprint.",
         "source": "graph",
         "ref": "llm_investigator",
         "entity_ids": [
@@ -114,7 +122,7 @@
       "CC-4432",
       "CC-4675"
     ],
-    "summary": "This case was triggered by a real-time risk score of 0.90 for an online transaction of $99.92 on card C07987-K2. The graph and case-memory analysis showed that the rare device profile was shared across five distinct cards in a tight six-day window with near-identical micro-amounts, indicating automated card-testing or a credential-stuffing script. The verdict was closed_fraud due to the high fraud probability of 0.99 and connection to a fraudulent device ring. Following the investigation, the card was blocked under policy 6, a case was created, a report was filed, and connected cards are being monitored.",
+    "summary": "The case was triggered by a real-time risk score of 0.90 for an online transaction of $99.92 on card C07987-K2 (customer C07987) using a new device profile. The graph showed that the device profile 'Windows | other | chrome 61.0 | 1280x720' was shared by 4 other connected cards, with near-identical purchases on 2 of those cards. The verdict is fraud with an initial and final fraud probability of 0.99, supported by case memory and device fan-out evidence. Actions taken include blocking the card (recommended, pending approval) and monitoring connected cards (auto).",
     "written_to_graph": true,
     "graph_case_id": "CASE-2016-0019"
   },
@@ -134,12 +142,12 @@
       {
         "action": "FILE_REPORT",
         "route": "L2",
-        "reason": "policy 3a, R6: fraud confirmed or strongly suspected and the activity connects to a shared device profile or to fraud on other cards"
+        "reason": "policy 3a, R6: fraud confirmed or strongly suspected and the activity is linked to fraud on 4 other card(s) (4 via same rare device profile; 2 via near-identical purchase on the same device profile)"
       },
       {
         "action": "MONITOR_CONNECTED_CARDS",
         "route": "auto",
-        "reason": "R6: 4 other card(s) share the device/ring"
+        "reason": "R6: 4 other card(s) are linked to this activity (4 via same rare device profile; 2 via near-identical purchase on the same device profile)"
       }
     ],
     "final": [
@@ -156,20 +164,20 @@
       {
         "action": "FILE_REPORT",
         "route": "L2",
-        "reason": "policy 3a, R6: fraud confirmed or strongly suspected and the activity connects to a shared device profile or to fraud on other cards"
+        "reason": "policy 3a, R6: fraud confirmed or strongly suspected and the activity is linked to fraud on 4 other card(s) (4 via same rare device profile; 2 via near-identical purchase on the same device profile)"
       },
       {
         "action": "MONITOR_CONNECTED_CARDS",
         "route": "auto",
-        "reason": "R6: 4 other card(s) share the device/ring"
+        "reason": "R6: 4 other card(s) are linked to this activity (4 via same rare device profile; 2 via near-identical purchase on the same device profile)"
       }
     ],
     "what_changed": "nothing"
   },
   "sar": {
     "file": true,
-    "reason": "File (policy 3a, R6): fraud confirmed or strongly suspected and the activity connects to a shared device profile or to fraud on other cards.",
-    "narrative": "Customer C07987, utilizing card C07987-K2, was implicated in fraudulent activity involving an online transaction on 2016-12-01 17:28:53 for the amount of $99.92 in billing region 264. The transaction was carried out using a new device profile 'Windows | other | chrome 61.0 | 1280x720'. This activity is suspicious because the device fanout confirms the rare browser profile was used across five distinct cards in a tight six-day window between 2016-11-29 and 2016-12-04 for nearly identical micro-amounts, matching patterns of automated card-testing or a credential-stuffing script. The case-memory model gave the transaction a calibrated fraud rate of 65.7% with a score of 0.872, and the initial and final fraud probabilities were assessed at 0.99. The total exposure amount is $99.92. Actions taken include blocking the card recommended under L1 per policy 6, creating the case automatically per policy 3a, filing a report recommended under L2 per policy 3a and R6 due to the connection to a shared device profile and fraud on other cards, and automatically monitoring connected cards.",
+    "reason": "File (policy 3a, R6): fraud confirmed or strongly suspected and the activity is linked to fraud on 4 other card(s) (4 via same rare device profile; 2 via near-identical purchase on the same device profile).",
+    "narrative": "Customer C07987, holding card C07987-K2, was subjected to fraudulent online activity on 2016-12-01 at 17:28:53. An online transaction of $99.92 was executed using a new device profile 'Windows | other | chrome 61.0 | 1280x720'. This activity is highly suspicious as the transaction scored 0.90 via the bank model and 0.872 via the case-memory model, and the device is shared with 4 other cards in a coordinated clustering pattern involving near-identical amounts. The total exposure amount is $99.92. Actions taken include an automatic case creation, automatic monitoring of connected cards, and recommended card blocking and SAR filing under policy 3a and R6. How the 4 connected card(s) are linked: 4 card(s) use the same rare device profile as this card; 2 card(s) made a near-identical purchase within 48 hours on the same device profile.",
     "subjects": [
       "C07987",
       "C07987-K2",
@@ -187,6 +195,6 @@
   },
   "stop_reason": "Stopped under policy section 6: probability 0.99 with at least two independent lines of evidence; further steps would not change the decision.",
   "tool_calls": 13,
-  "tokens": 5947,
-  "latency_s": 6.6
+  "tokens": 6148,
+  "latency_s": 11.5
 }

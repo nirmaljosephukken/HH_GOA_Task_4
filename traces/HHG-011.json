@@ -49,10 +49,10 @@
      "customer": 2,
      "customer_cards": 2
     },
-    "latency_s": 0.123,
+    "latency_s": 0.144,
     "transport": "mcp"
    },
-   "elapsed_s": 0.12
+   "elapsed_s": 0.14
   },
   {
    "step": 4,
@@ -68,10 +68,10 @@
     "result": {
      "rows": 6240
     },
-    "latency_s": 1.595,
+    "latency_s": 2.1,
     "transport": "mcp"
    },
-   "elapsed_s": 1.72
+   "elapsed_s": 2.25
   },
   {
    "step": 5,
@@ -95,10 +95,10 @@
      "first_ts": "2016-07-02 00:06:21",
      "last_ts": "2016-12-29 03:12:50"
     },
-    "latency_s": 0.182,
+    "latency_s": 0.257,
     "transport": "mcp"
    },
-   "elapsed_s": 1.9
+   "elapsed_s": 2.5
   },
   {
    "step": 6,
@@ -112,10 +112,10 @@
     "result": {
      "rows": 19
     },
-    "latency_s": 0.115,
+    "latency_s": 0.139,
     "transport": "mcp"
    },
-   "elapsed_s": 2.02
+   "elapsed_s": 2.64
   },
   {
    "step": 7,
@@ -132,10 +132,10 @@
      "device": 2,
      "txns": 4
     },
-    "latency_s": 0.119,
+    "latency_s": 0.139,
     "transport": "mcp"
    },
-   "elapsed_s": 2.13
+   "elapsed_s": 2.78
   },
   {
    "step": 8,
@@ -150,10 +150,10 @@
      "closed_cases": 0,
      "agent_cases": 1
     },
-    "latency_s": 0.11,
+    "latency_s": 0.143,
     "transport": "mcp"
    },
-   "elapsed_s": 2.24
+   "elapsed_s": 2.92
   },
   {
    "step": 9,
@@ -172,10 +172,10 @@
     "result": {
      "rows": 19
     },
-    "latency_s": 0.163,
+    "latency_s": 0.203,
     "transport": "mcp"
    },
-   "elapsed_s": 2.41
+   "elapsed_s": 3.13
   },
   {
    "step": 10,
@@ -189,12 +189,12 @@
     "result": {
      "closed_cases": 11,
      "connected_closed_cases": 0,
-     "agent_cases": 1
+     "agent_cases": 2
     },
-    "latency_s": 0.118,
+    "latency_s": 0.154,
     "transport": "mcp"
    },
-   "elapsed_s": 2.53
+   "elapsed_s": 3.28
   },
   {
    "step": 11,
@@ -297,7 +297,7 @@
      "step": 10
     }
    ],
-   "elapsed_s": 2.62
+   "elapsed_s": 3.42
   },
   {
    "step": 12,
@@ -312,10 +312,10 @@
     "result": {
      "rows": 8
     },
-    "latency_s": 0.063,
+    "latency_s": 0.104,
     "transport": "mcp"
    },
-   "elapsed_s": 2.69
+   "elapsed_s": 3.52
   },
   {
    "step": 13,
@@ -330,10 +330,10 @@
     "result": {
      "rows": 6
     },
-    "latency_s": 0.077,
+    "latency_s": 0.086,
     "transport": "mcp"
    },
-   "elapsed_s": 2.76
+   "elapsed_s": 3.61
   },
   {
    "step": 14,
@@ -348,54 +348,79 @@
     "result": {
      "rows": 4
     },
-    "latency_s": 0.062,
+    "latency_s": 0.078,
     "transport": "mcp"
    },
-   "elapsed_s": 2.83
+   "elapsed_s": 3.69
   },
   {
    "step": 15,
    "ts": "2016-12-29 06:35:14",
    "kind": "tool",
-   "title": "llm:device_fanout(device=SM-G610F Build/NRD90M |  | chrome 66.0 for android | , t0=2016-12-19 03:27:44, t1=2017-01-08 03:27:44)",
+   "title": "llm:device_fanout(device=SM-G610F Build/NRD90M |  | chrome 66.0 for android | , t0=2016-12-19 03:27:44, t1=2016-12-30 03:27:44)",
    "detail": {
     "args": {
      "device": "SM-G610F Build/NRD90M |  | chrome 66.0 for android | ",
      "t0": "2016-12-19 03:27:44",
-     "t1": "2017-01-08 03:27:44"
+     "t1": "2016-12-30 03:27:44"
     },
     "result": {
      "device": 2,
-     "txns": 4
+     "txns": 3
     },
-    "latency_s": 0.128,
+    "latency_s": 0.157,
     "transport": "mcp"
    },
-   "elapsed_s": 4.14
+   "elapsed_s": 5.16
   },
   {
    "step": 16,
    "ts": "2016-12-29 06:35:44",
+   "kind": "tool",
+   "title": "llm:prior_cases(customer_id=C11923)",
+   "detail": {
+    "args": {
+     "customer_id": "C11923"
+    },
+    "result": {
+     "closed_cases": 11,
+     "connected_closed_cases": 0,
+     "agent_cases": 2
+    },
+    "latency_s": 0.17,
+    "transport": "mcp"
+   },
+   "elapsed_s": 5.33
+  },
+  {
+   "step": 17,
+   "ts": "2016-12-29 06:36:14",
    "kind": "llm",
-   "title": "LLM investigator (gemini-flash-lite-latest): 1 extra tool call(s)",
+   "title": "LLM investigator (gemini-3.5-flash-lite): 2 extra tool call(s)",
    "detail": {
     "calls": [
      {
       "tool": "device_fanout",
       "args": {
-       "t1": "2017-01-08 03:27:44",
+       "t1": "2016-12-30 03:27:44",
        "device": "SM-G610F Build/NRD90M |  | chrome 66.0 for android | ",
        "t0": "2016-12-19 03:27:44"
       }
+     },
+     {
+      "tool": "prior_cases",
+      "args": {
+       "customer_id": "C11923"
+      }
      }
     ],
-    "notes": "The device fan-out query across the shared Android mobile profile confirmed cross-card usage with near-identical transaction amounts near $131, including high model scores on C05595-K1 (0.96) and C03938-K1 (0.87). This matches the known multi-card fraud pattern targeting customer C11923, despite the low individual model score for this specific event. The customer has an extensive history of confirmed CNP fraud and reissued cards. Uncertainty remains only around whether the fringe device cluster represents a sophisticated ring compromising multiple customer portfolios simultaneously."
+    "notes": "Device fan-out confirmed the rare mobile profile was used on two other cards (C05595-K1 and C03938-K1) within hours, scoring high on the model. Customer history shows extensive prior fraud cases on C11923-K2 involving card-not-present and card-testing patterns. Despite a low individual memory score of 0.025, the multi-card device linkage and identical amount matching strongly indicate coordinated fraud."
    },
-   "elapsed_s": 5.57
+   "elapsed_s": 6.94
   },
   {
-   "step": 17,
-   "ts": "2016-12-29 06:36:14",
+   "step": 18,
+   "ts": "2016-12-29 06:36:44",
    "kind": "assess",
    "title": "Fraud probability 0.95 (memory-model prior 0.01); confidence high; hypothesis card_not_present_new_device; exposure $131.30",
    "detail": {
@@ -421,11 +446,11 @@
      "Evidence conflicts: device, network, trigger point to fraud; ml point to legitimate use"
     ]
    },
-   "elapsed_s": 5.57
+   "elapsed_s": 6.94
   },
   {
-   "step": 18,
-   "ts": "2016-12-29 06:36:44",
+   "step": 19,
+   "ts": "2016-12-29 06:37:14",
    "kind": "decision",
    "title": "Initial next best action: BLOCK_CARD, CREATE_CASE, FILE_REPORT, MONITOR_CONNECTED_CARDS",
    "detail": {
@@ -443,23 +468,23 @@
      {
       "action": "FILE_REPORT",
       "route": "L2",
-      "reason": "policy 3a, R6: fraud confirmed or strongly suspected and the activity connects to a shared device profile or to fraud on other cards"
+      "reason": "policy 3a, R6: fraud confirmed or strongly suspected and the activity is linked to fraud on 5 other card(s) (3 via same rare device profile; 2 via near-identical purchase with the same email domains)"
      },
      {
       "action": "MONITOR_CONNECTED_CARDS",
       "route": "auto",
-      "reason": "R6: 5 other card(s) share the device/ring"
+      "reason": "R6: 5 other card(s) are linked to this activity (3 via same rare device profile; 2 via near-identical purchase with the same email domains)"
      }
     ],
     "request": null,
     "why_request": "",
     "policy_check": []
    },
-   "elapsed_s": 5.57
+   "elapsed_s": 6.94
   },
   {
-   "step": 19,
-   "ts": "2016-12-29 06:37:14",
+   "step": 20,
+   "ts": "2016-12-29 06:37:44",
    "kind": "execute",
    "title": "Executed 2 auto action(s); 2 queued for approval",
    "detail": {
@@ -472,23 +497,23 @@
      "FILE_REPORT (L2)"
     ]
    },
-   "elapsed_s": 5.57
-  },
-  {
-   "step": 20,
-   "ts": "2016-12-29 06:37:44",
-   "kind": "llm",
-   "title": "Case narrative written by gemini-flash-lite-latest (3/3 fields accepted)",
-   "detail": {
-    "summary": "This case was triggered by a customer report from C11923 stating they never made a $131.30 online purchase on card C11923-K2. The graph and device fan-out query showed that the device profile was shared across multiple cards with near-identical transaction amounts and high model scores. The final ve",
-    "sar_narrative": "Customer C11923 reported an unauthorized online transaction on card C11923-K2. The fraudulent activity occurred on 2016-12-29 at 03:27:44 in the online channel for the amount of $131.30. The transaction was carried out using a new device profile, specifically SM-G610F Build/NRD90M utilizing chrome 6",
-    "pattern_description": ""
-   },
-   "elapsed_s": 7.84
+   "elapsed_s": 6.94
   },
   {
    "step": 21,
    "ts": "2016-12-29 06:38:14",
+   "kind": "llm",
+   "title": "Case narrative written by gemini-3.5-flash-lite (3/3 fields accepted)",
+   "detail": {
+    "summary": "This case was triggered by customer C11923 reporting an unauthorized online purchase of $131.30 on card C11923-K2, dated 2016-12-29 03:27:44. The graph analysis showed that the device profile was shared across multiple cards and linked to near-identical purchases within 48 hours. The verdict is frau",
+    "sar_narrative": "Customer C11923 reported an unauthorized online transaction of $131.30 on card C11923-K2, which occurred on 2016-12-29 03:27:44 using the online channel and a new device profile 'SM-G610F Build/NRD90M |  | chrome 66.0 for android | '. The fraud was carried out using card-not-present methods on a new",
+    "pattern_description": ""
+   },
+   "elapsed_s": 9.36
+  },
+  {
+   "step": 22,
+   "ts": "2016-12-29 06:38:44",
    "kind": "memory",
    "title": "Case CASE-2016-0011 written to case memory (closed_fraud, fraud, card_not_present_new_device)",
    "detail": {
@@ -505,74 +530,55 @@
      ]
     }
    },
-   "elapsed_s": 7.84
+   "elapsed_s": 9.36
   }
  ],
  "transport": [
-  "mcp:card_window:0.13s",
-  "mcp:card_profile:0.11s",
-  "mcp:client_history:0.11s",
-  "mcp:device_fanout:0.13s",
-  "mcp:peer_txns:0.13s",
-  "mcp:prior_cases:0.12s",
-  "mcp:similar_closed_cases:0.07s",
-  "mcp:similar_agent_cases:0.06s",
-  "mcp:policy_search:0.06s",
-  "mcp:device_fanout:0.12s",
-  "mcp:card_window:0.11s",
-  "restpp:upsert_case",
-  "mcp:txn_context:0.11s",
-  "mcp:card_window:0.21s",
-  "mcp:card_profile:0.12s",
-  "mcp:client_history:0.11s",
-  "mcp:peer_txns:0.17s",
-  "mcp:prior_cases:0.12s",
-  "mcp:similar_closed_cases:0.06s",
-  "mcp:similar_agent_cases:0.06s",
-  "mcp:policy_search:0.06s",
-  "mcp:prior_cases:0.11s",
-  "restpp:upsert_case",
-  "mcp:txn_context:0.16s",
-  "mcp:card_window:0.22s",
-  "mcp:card_profile:0.12s",
-  "mcp:client_history:0.11s",
-  "mcp:device_fanout:0.18s",
-  "mcp:peer_txns:0.14s",
-  "mcp:prior_cases:0.12s",
-  "mcp:similar_closed_cases:0.06s",
-  "mcp:similar_agent_cases:0.06s",
-  "mcp:policy_search:0.06s",
-  "mcp:device_fanout:0.51s",
-  "restpp:upsert_case",
-  "mcp:txn_context:0.11s",
-  "mcp:card_window:0.13s",
-  "mcp:card_profile:0.13s",
-  "mcp:client_history:0.11s",
-  "mcp:device_fanout:0.18s",
-  "mcp:peer_txns:0.12s",
-  "mcp:prior_cases:0.12s",
-  "mcp:similar_closed_cases:0.06s",
-  "mcp:similar_agent_cases:0.07s",
-  "mcp:policy_search:0.06s",
-  "mcp:prior_cases:0.13s",
-  "restpp:upsert_case",
-  "mcp:txn_context:0.12s",
-  "mcp:card_window:1.55s",
-  "mcp:card_profile:0.18s",
-  "mcp:client_history:0.11s",
-  "mcp:device_fanout:0.12s",
-  "mcp:device_cases:0.11s",
-  "mcp:peer_txns:0.16s",
-  "mcp:prior_cases:0.12s",
-  "mcp:similar_closed_cases:0.06s",
+  "mcp:txn_context:0.63s",
+  "mcp:card_window:0.23s",
+  "mcp:card_profile:0.15s",
+  "mcp:client_history:0.14s",
+  "mcp:device_fanout:0.17s",
+  "mcp:peer_txns:0.20s",
+  "mcp:prior_cases:0.15s",
+  "mcp:amount_band_scan:0.21s",
+  "mcp:similar_closed_cases:0.08s",
   "mcp:similar_agent_cases:0.08s",
-  "mcp:policy_search:0.06s",
-  "mcp:device_fanout:0.13s",
+  "mcp:policy_search:0.07s",
+  "mcp:device_fanout:0.14s",
+  "mcp:prior_cases:0.17s",
+  "restpp:upsert_case",
+  "mcp:txn_context:0.18s",
+  "mcp:card_window:0.33s",
+  "mcp:card_profile:0.15s",
+  "mcp:client_history:0.13s",
+  "mcp:device_fanout:0.23s",
+  "mcp:peer_txns:0.18s",
+  "mcp:prior_cases:0.17s",
+  "mcp:similar_closed_cases:0.09s",
+  "mcp:similar_agent_cases:0.11s",
+  "mcp:policy_search:0.08s",
+  "mcp:device_fanout:0.19s",
+  "mcp:card_window:0.14s",
+  "restpp:upsert_case",
+  "mcp:txn_context:0.14s",
+  "mcp:card_window:2.05s",
+  "mcp:card_profile:0.26s",
+  "mcp:client_history:0.14s",
+  "mcp:device_fanout:0.14s",
+  "mcp:device_cases:0.14s",
+  "mcp:peer_txns:0.20s",
+  "mcp:prior_cases:0.15s",
+  "mcp:similar_closed_cases:0.10s",
+  "mcp:similar_agent_cases:0.09s",
+  "mcp:policy_search:0.08s",
+  "mcp:device_fanout:0.16s",
+  "mcp:prior_cases:0.17s",
   "restpp:upsert_case"
  ],
  "llm": {
   "provider": "gemini",
-  "model": "gemini-flash-lite-latest",
+  "model": "gemini-3.5-flash-lite",
   "calls": 3,
   "errors": []
  }

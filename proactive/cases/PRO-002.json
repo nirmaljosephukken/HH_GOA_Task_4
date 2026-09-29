@@ -92,16 +92,16 @@
         ]
       },
       {
-        "claim": "Case memory: this device profile is on confirmed closed case(s) CC-5322, CC-5536, CC-5339, CC-5404, CC-5491, CC-5399",
+        "claim": "Case memory: this device profile is on confirmed closed case(s) CC-5322, CC-5404, CC-5491, CC-5277, CC-5536, CC-5339",
         "source": "graph",
         "ref": "device_cases",
         "entity_ids": [
           "CC-5322",
-          "CC-5536",
-          "CC-5339",
           "CC-5404",
           "CC-5491",
-          "CC-5399"
+          "CC-5277",
+          "CC-5536",
+          "CC-5339"
         ]
       },
       {
@@ -146,19 +146,27 @@
         ]
       },
       {
-        "claim": "Case memory: similar prior investigations retrieved - CC-5322 (confirmed_fraud, card_not_present_new_device, $22.37): Case CC-5322: cardholder C12028 reported unrecognized activity on card C12028-K2. 1 transaction(s) between 201; CC-5536 (confirmed_fraud, card_not_present_fraud, $109.39): Case CC-5536: cardholder C08962 reported unrecognized activity on card C08962-K2. 5 transaction(s) between 201; CC-5339 (confirmed_fraud, card_not_present_new_device, $3,047.13): Case CC-5339: cardholder C07562 reported unrecognized activity on card C07562-K2. 68 transaction(s) between 20",
+        "claim": "Case memory: similar prior investigations retrieved - CC-5322 (confirmed_fraud, card_not_present_new_device, $22.37): Case CC-5322: cardholder C12028 reported unrecognized activity on card C12028-K2. 1 transaction(s) between 201; CC-5404 (confirmed_fraud, card_not_present_new_device, $63.25): Case CC-5404: cardholder C11595 reported unrecognized activity on card C11595-K1. 2 transaction(s) between 201; CC-5491 (confirmed_fraud, card_not_present_fraud, $42.25): Case CC-5491: cardholder C11807 reported unrecognized activity on card C11807-K1. 1 transaction(s) between 201",
         "source": "graph",
         "ref": "similar_closed_cases + prior_cases + device_cases",
         "entity_ids": [
           "CC-5322",
-          "CC-5536",
-          "CC-5339",
           "CC-5404",
+          "CC-5491",
+          "CC-5277",
           "CC-5416"
         ]
       },
       {
-        "claim": "Investigator note (LLM): The device fan-out lookup confirmed intensive multi-card activity originating from the same mobile browser profile within a 48-hour window, matching identical low-dollar amounts (~$22 and ~$46). Several of these associated transactions carry very high memory model scores and align with known confirmed fraud cases. The target card shows a new device status, an unprecedented product code usage, and previous fraud history. Remaining uncertainty centers on whether the cardholder authorized any of these micro-purchases or if compromised credentials drove the entire cluster.",
+        "claim": "Earlier agent cases with a similar profile: CASE-2016-ADHOC-950 (fraud, card_not_present_new_device)",
+        "source": "graph",
+        "ref": "similar_agent_cases",
+        "entity_ids": [
+          "CASE-2016-ADHOC-950"
+        ]
+      },
+      {
+        "claim": "Investigator note (LLM): The device fanout confirmed a burst of similar low-dollar online transactions across multiple cards sharing the exact device profile and high memory-model scores. Customer C13001 has a recent prior confirmed fraud case (CC-4776) involving the same card. The device is flagged as new for this account and is directly tied to multiple historical fraud cases. This forms a strong indicator of a coordinated testing or bust-out fraud ring.",
         "source": "graph",
         "ref": "llm_investigator",
         "entity_ids": [
@@ -168,12 +176,12 @@
     ],
     "similar_prior_cases": [
       "CC-5322",
-      "CC-5536",
-      "CC-5339",
       "CC-5404",
+      "CC-5491",
+      "CC-5277",
       "CC-5416"
     ],
-    "summary": "This case was triggered by an analyst request monitoring a device profile used across 18 cards in November and December. The graph analysis revealed that the device profile was linked to intensive multi-card activity, shared with 21 other cards, and connected to 10 confirmed closed fraud cases. The verdict is fraud due to high memory-model scores, a new device status, and historical connections to known fraud rings. Next steps include blocking the card (pending approval), monitoring connected cards, and filing a regulatory report (pending approval).",
+    "summary": "This case was triggered by an analyst request monitoring a device profile used on 18 cards in Nov-Dec. The graph showed the device profile was used by 22 cards between 2016-10-28 and 2016-11-11, with ties to 10 confirmed closed cases. The verdict is fraud with an initial and final fraud probability of 0.99 due to the device profile association and card-not-present new device pattern. Next actions include block card recommended pending approval, create case auto, file report recommended pending approval, and monitor connected cards auto.",
     "written_to_graph": true,
     "graph_case_id": "CASE-2016-PRO-002"
   },
@@ -193,12 +201,12 @@
       {
         "action": "FILE_REPORT",
         "route": "L2",
-        "reason": "policy 3a, R6: fraud confirmed or strongly suspected and the activity connects to a shared device profile or to fraud on other cards"
+        "reason": "policy 3a, R6: fraud confirmed or strongly suspected and the activity is linked to fraud on 21 other card(s) (21 via same rare device profile; 3 via near-identical purchase on the same device profile)"
       },
       {
         "action": "MONITOR_CONNECTED_CARDS",
         "route": "auto",
-        "reason": "R6: 21 other card(s) share the device/ring"
+        "reason": "R6: 21 other card(s) are linked to this activity (21 via same rare device profile; 3 via near-identical purchase on the same device profile)"
       }
     ],
     "final": [
@@ -215,20 +223,20 @@
       {
         "action": "FILE_REPORT",
         "route": "L2",
-        "reason": "policy 3a, R6: fraud confirmed or strongly suspected and the activity connects to a shared device profile or to fraud on other cards"
+        "reason": "policy 3a, R6: fraud confirmed or strongly suspected and the activity is linked to fraud on 21 other card(s) (21 via same rare device profile; 3 via near-identical purchase on the same device profile)"
       },
       {
         "action": "MONITOR_CONNECTED_CARDS",
         "route": "auto",
-        "reason": "R6: 21 other card(s) share the device/ring"
+        "reason": "R6: 21 other card(s) are linked to this activity (21 via same rare device profile; 3 via near-identical purchase on the same device profile)"
       }
     ],
     "what_changed": "nothing"
   },
   "sar": {
     "file": true,
-    "reason": "File (policy 3a, R6): fraud confirmed or strongly suspected and the activity connects to a shared device profile or to fraud on other cards.",
-    "narrative": "This Suspicious Activity Report details fraudulent activity associated with customer C13001 using card C13001-K1. On 2016-11-06 at 03:58:01, an online transaction of $46.02 for product C was conducted using a new device profile, SM-A300H Build/LRX22G |  | chrome 65.0 for android |. The channel used was online. The activity occurred while utilizing a mobile browser profile that was tracked across 22 cards between 2016-10-28 and 2016-11-11 with high memory-model scores and links to 10 confirmed closed fraud cases. This is suspicious because the device profile fan-out lookup confirmed intensive multi-card activity within a 48-hour window matching identical low-dollar amounts, combined with an unprecedented product code usage and previous fraud history on the card. The total exposure amount is $46.02. Automated actions taken include creating the case and monitoring connected cards. Recommended actions awaiting human approval include blocking the card under policy 6 and filing a report under policy 3a and rule R6 due to confirmed or strongly suspected fraud connected to a shared device profile.",
+    "reason": "File (policy 3a, R6): fraud confirmed or strongly suspected and the activity is linked to fraud on 21 other card(s) (21 via same rare device profile; 3 via near-identical purchase on the same device profile).",
+    "narrative": "A fraud case was opened for customer C13001 and card C13001-K1 following an online transaction of $46.02 on 2016-11-06 03:58:01 using product code C. The transaction was conducted via an online channel using a new device profile 'SM-A300H Build/LRX22G |  | chrome 65.0 for android | ' with hotmail.com email addresses. The activity is suspicious because the device profile is rare, with only 54 uses in the whole dataset, and is linked to 21 other cards and 10 confirmed closed cases. Furthermore, 3 other cards made near-identical purchases within 48 hours on the same device profile. The total exposure amount is $46.02. Actions taken include blocking the card (recommended pending approval under policy 6), creating the case automatically (policy 3a), filing a report (recommended pending approval under policy 3a, R6), and monitoring connected cards automatically (R6). How the 21 connected card(s) are linked: 21 card(s) use the same rare device profile as this card; 3 card(s) made a near-identical purchase within 48 hours on the same device profile.",
     "subjects": [
       "C13001",
       "C13001-K1",
@@ -262,7 +270,7 @@
     ]
   },
   "stop_reason": "Stopped under policy section 6: probability 0.99 with at least two independent lines of evidence; further steps would not change the decision.",
-  "tool_calls": 13,
-  "tokens": 7760,
-  "latency_s": 6.6
+  "tool_calls": 14,
+  "tokens": 8339,
+  "latency_s": 7.4
 }

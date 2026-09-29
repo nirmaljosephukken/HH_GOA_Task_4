@@ -49,10 +49,10 @@
      "customer": 2,
      "customer_cards": 2
     },
-    "latency_s": 0.159,
+    "latency_s": 0.181,
     "transport": "mcp"
    },
-   "elapsed_s": 0.16
+   "elapsed_s": 0.18
   },
   {
    "step": 4,
@@ -68,10 +68,10 @@
     "result": {
      "rows": 660
     },
-    "latency_s": 0.226,
+    "latency_s": 0.331,
     "transport": "mcp"
    },
-   "elapsed_s": 0.39
+   "elapsed_s": 0.51
   },
   {
    "step": 5,
@@ -95,10 +95,10 @@
      "first_ts": "2016-07-02 00:42:31",
      "last_ts": "2016-12-19 21:50:54"
     },
-    "latency_s": 0.117,
+    "latency_s": 0.145,
     "transport": "mcp"
    },
-   "elapsed_s": 0.5
+   "elapsed_s": 0.66
   },
   {
    "step": 6,
@@ -112,10 +112,10 @@
     "result": {
      "rows": 4
     },
-    "latency_s": 0.11,
+    "latency_s": 0.135,
     "transport": "mcp"
    },
-   "elapsed_s": 0.61
+   "elapsed_s": 0.79
   },
   {
    "step": 7,
@@ -132,10 +132,10 @@
      "device": 2,
      "txns": 587
     },
-    "latency_s": 0.182,
+    "latency_s": 0.242,
     "transport": "mcp"
    },
-   "elapsed_s": 0.79
+   "elapsed_s": 1.03
   },
   {
    "step": 8,
@@ -154,10 +154,10 @@
     "result": {
      "rows": 12
     },
-    "latency_s": 0.138,
+    "latency_s": 0.183,
     "transport": "mcp"
    },
-   "elapsed_s": 0.93
+   "elapsed_s": 1.22
   },
   {
    "step": 9,
@@ -171,12 +171,12 @@
     "result": {
      "closed_cases": 19,
      "connected_closed_cases": 0,
-     "agent_cases": 1
+     "agent_cases": 4
     },
-    "latency_s": 0.12,
+    "latency_s": 0.171,
     "transport": "mcp"
    },
-   "elapsed_s": 1.05
+   "elapsed_s": 1.39
   },
   {
    "step": 10,
@@ -253,9 +253,9 @@
      "source": "graph",
      "ref": "prior_cases",
      "entity_ids": [
-      "CC-3079",
       "CC-0467",
       "CC-2059",
+      "CC-1925",
       "CC-5010"
      ],
      "lr": 1.3,
@@ -276,7 +276,7 @@
      "step": 9
     }
    ],
-   "elapsed_s": 1.07
+   "elapsed_s": 1.4
   },
   {
    "step": 11,
@@ -291,10 +291,10 @@
     "result": {
      "rows": 8
     },
-    "latency_s": 0.06,
+    "latency_s": 0.092,
     "transport": "mcp"
    },
-   "elapsed_s": 1.13
+   "elapsed_s": 1.49
   },
   {
    "step": 12,
@@ -309,10 +309,10 @@
     "result": {
      "rows": 6
     },
-    "latency_s": 0.065,
+    "latency_s": 0.108,
     "transport": "mcp"
    },
-   "elapsed_s": 1.19
+   "elapsed_s": 1.6
   },
   {
    "step": 13,
@@ -327,54 +327,81 @@
     "result": {
      "rows": 4
     },
-    "latency_s": 0.06,
+    "latency_s": 0.079,
     "transport": "mcp"
    },
-   "elapsed_s": 1.25
+   "elapsed_s": 1.68
   },
   {
    "step": 14,
    "ts": "2016-12-20 03:15:56",
    "kind": "tool",
-   "title": "llm:device_fanout(device= |  | chrome 66.0 | , t0=2016-12-17 22:08:56, t1=2016-12-21 22:08:56)",
+   "title": "llm:device_fanout(device= |  | chrome 66.0 | , t0=2016-12-17 22:08:56, t1=2016-12-19 23:08:56)",
    "detail": {
     "args": {
      "device": " |  | chrome 66.0 | ",
      "t0": "2016-12-17 22:08:56",
-     "t1": "2016-12-21 22:08:56"
+     "t1": "2016-12-19 23:08:56"
     },
     "result": {
      "device": 2,
-     "txns": 112
+     "txns": 80
     },
-    "latency_s": 0.513,
+    "latency_s": 0.188,
     "transport": "mcp"
    },
-   "elapsed_s": 38.64
+   "elapsed_s": 2.99
   },
   {
    "step": 15,
    "ts": "2016-12-20 03:16:26",
+   "kind": "tool",
+   "title": "llm:card_window(card_id=C11642-K1, t0=2016-12-17 22:08:56, t1=2016-12-19 23:08:56)",
+   "detail": {
+    "args": {
+     "card_id": "C11642-K1",
+     "t0": "2016-12-17 22:08:56",
+     "t1": "2016-12-19 23:08:56"
+    },
+    "result": {
+     "rows": 0
+    },
+    "latency_s": 0.14,
+    "transport": "mcp"
+   },
+   "elapsed_s": 3.13
+  },
+  {
+   "step": 16,
+   "ts": "2016-12-20 03:16:56",
    "kind": "llm",
-   "title": "LLM investigator (gemini-flash-lite-latest): 1 extra tool call(s)",
+   "title": "LLM investigator (gemini-3.5-flash-lite): 2 extra tool call(s)",
    "detail": {
     "calls": [
      {
       "tool": "device_fanout",
       "args": {
        "device": " |  | chrome 66.0 | ",
+       "t1": "2016-12-19 23:08:56",
+       "t0": "2016-12-17 22:08:56"
+      }
+     },
+     {
+      "tool": "card_window",
+      "args": {
+       "t1": "2016-12-19 23:08:56",
        "t0": "2016-12-17 22:08:56",
-       "t1": "2016-12-21 22:08:56"
+       "card_id": "C11642-K1"
       }
      }
     ],
-    "notes": "The device fanout lookup reveals that the shared Chrome 66.0 device profile appears across multiple distinct cards within short time windows, indicating broader browser fingerprint reuse. Several associated transactions show elevated model scores, consistent with automated card testing patterns across multiple accounts. The cardholder's history of 18 prior confirmed fraud cases establishes a baseline vulnerability for card-not-present exploitation. No remaining uncertainties affect the classification of this transaction as unauthorized fraud."
+    "notes": "Device fanout showed widespread multi-card usage of the profile across distinct accounts, while card C11642-K1 had no activity in the queried window. This context highlights broader device sharing or proxy usage patterns. The card's extensive prior fraud history heavily biases the prior probability. Remaining uncertainty centres on whether this specific online transaction is legitimate cardholder activity or part of the ongoing compromise cycle."
    },
-   "elapsed_s": 40.12
+   "elapsed_s": 4.47
   },
   {
-   "step": 16,
-   "ts": "2016-12-20 03:16:56",
+   "step": 17,
+   "ts": "2016-12-20 03:17:26",
    "kind": "assess",
    "title": "Fraud probability 0.99 (memory-model prior 0.70); confidence high; hypothesis card_not_present_fraud; exposure $166.97",
    "detail": {
@@ -401,11 +428,11 @@
      "Evidence conflicts: ml, network, sequence, trigger point to fraud; device point to legitimate use"
     ]
    },
-   "elapsed_s": 40.12
+   "elapsed_s": 4.47
   },
   {
-   "step": 17,
-   "ts": "2016-12-20 03:17:26",
+   "step": 18,
+   "ts": "2016-12-20 03:17:56",
    "kind": "decision",
    "title": "Initial next best action: BLOCK_CARD, CREATE_CASE, FILE_REPORT, MONITOR_CONNECTED_CARDS",
    "detail": {
@@ -423,23 +450,23 @@
      {
       "action": "FILE_REPORT",
       "route": "L2",
-      "reason": "policy 3a, R6: fraud confirmed or strongly suspected and the activity connects to a shared device profile or to fraud on other cards"
+      "reason": "policy 3a, R6: fraud confirmed or strongly suspected and the activity is linked to fraud on 1 other card(s) (1 via near-identical purchase with the same email domains)"
      },
      {
       "action": "MONITOR_CONNECTED_CARDS",
       "route": "auto",
-      "reason": "R6: 1 other card(s) share the device/ring"
+      "reason": "R6: 1 other card(s) are linked to this activity (1 via near-identical purchase with the same email domains)"
      }
     ],
     "request": null,
     "why_request": "",
     "policy_check": []
    },
-   "elapsed_s": 40.12
+   "elapsed_s": 4.47
   },
   {
-   "step": 18,
-   "ts": "2016-12-20 03:17:56",
+   "step": 19,
+   "ts": "2016-12-20 03:18:26",
    "kind": "execute",
    "title": "Executed 2 auto action(s); 2 queued for approval",
    "detail": {
@@ -452,23 +479,23 @@
      "FILE_REPORT (L2)"
     ]
    },
-   "elapsed_s": 40.12
-  },
-  {
-   "step": 19,
-   "ts": "2016-12-20 03:18:26",
-   "kind": "llm",
-   "title": "Case narrative written by gemini-flash-lite-latest (3/3 fields accepted)",
-   "detail": {
-    "summary": "This case was triggered by customer C13171 reporting an unauthorised $55.68 online purchase on card C13171-K2 via message: 'I never made this $55.68 purchase. Please check my card.' Refers to 3558054. The graph showed a burst of online transactions on the same card within 48 hours and connections to",
-    "sar_narrative": "Customer C13171 reported an unauthorised online transaction on card C13171-K2. The suspicious activity occurred on December 19, 2016, via the online channel using device profile ' |  | chrome 66.0 | '. The transactions involved a burst of online purchases on card C13171-K2 totaling $166.97, specific",
-    "pattern_description": ""
-   },
-   "elapsed_s": 42.45
+   "elapsed_s": 4.47
   },
   {
    "step": 20,
    "ts": "2016-12-20 03:18:56",
+   "kind": "llm",
+   "title": "Case narrative written by gemini-3.5-flash-lite (3/3 fields accepted)",
+   "detail": {
+    "summary": "This case was triggered by a customer report from C13171 stating, 'I never made this $55.68 purchase. Please check my card.' Referring to transaction 3558054. The graph showed connections to 1 other card via near-identical purchases within 48 hours with the same purchaser and recipient email domains",
+    "sar_narrative": "This Suspicious Activity Report details fraudulent activity involving customer C13171 using card C13171-K2 in the online channel. On 2016-12-19, three unauthorised online transactions occurred totaling an exposure of $166.97, specifically transaction ID 3557979 for $55.60, transaction ID 3557987 for",
+    "pattern_description": ""
+   },
+   "elapsed_s": 7.02
+  },
+  {
+   "step": 21,
+   "ts": "2016-12-20 03:19:26",
    "kind": "memory",
    "title": "Case CASE-2016-0008 written to case memory (closed_fraud, fraud, card_not_present_fraud)",
    "detail": {
@@ -485,75 +512,42 @@
      ]
     }
    },
-   "elapsed_s": 42.45
+   "elapsed_s": 7.02
   }
  ],
  "transport": [
-  "mcp:txn_context:0.11s",
-  "mcp:card_window:0.27s",
-  "mcp:card_profile:0.13s",
-  "mcp:client_history:0.11s",
-  "mcp:device_fanout:0.21s",
-  "mcp:peer_txns:0.17s",
-  "mcp:prior_cases:0.12s",
-  "mcp:similar_closed_cases:0.06s",
-  "mcp:similar_agent_cases:0.06s",
-  "mcp:policy_search:0.07s",
-  "mcp:card_window:0.11s",
-  "mcp:prior_cases:0.12s",
-  "restpp:upsert_case",
-  "mcp:txn_context:0.11s",
-  "mcp:card_window:0.22s",
-  "mcp:card_profile:0.12s",
+  "mcp:txn_context:0.63s",
+  "mcp:card_window:0.23s",
+  "mcp:card_profile:0.15s",
   "mcp:client_history:0.14s",
-  "mcp:peer_txns:0.12s",
-  "mcp:prior_cases:0.11s",
-  "mcp:similar_closed_cases:0.06s",
-  "mcp:similar_agent_cases:0.06s",
-  "mcp:policy_search:0.06s",
-  "mcp:prior_cases:0.12s",
+  "mcp:device_fanout:0.17s",
+  "mcp:peer_txns:0.20s",
+  "mcp:prior_cases:0.15s",
+  "mcp:amount_band_scan:0.21s",
+  "mcp:similar_closed_cases:0.08s",
+  "mcp:similar_agent_cases:0.08s",
+  "mcp:policy_search:0.07s",
+  "mcp:device_fanout:0.14s",
+  "mcp:prior_cases:0.17s",
   "restpp:upsert_case",
-  "mcp:txn_context:0.12s",
-  "mcp:card_window:0.13s",
-  "mcp:card_profile:0.11s",
-  "mcp:client_history:0.11s",
-  "mcp:device_fanout:0.13s",
-  "mcp:peer_txns:0.13s",
-  "mcp:prior_cases:0.12s",
-  "mcp:similar_closed_cases:0.07s",
-  "mcp:similar_agent_cases:0.06s",
-  "mcp:policy_search:0.06s",
-  "mcp:device_fanout:0.12s",
-  "mcp:card_window:0.11s",
-  "restpp:upsert_case",
-  "mcp:txn_context:0.11s",
-  "mcp:card_window:0.21s",
-  "mcp:card_profile:0.12s",
-  "mcp:client_history:0.11s",
-  "mcp:peer_txns:0.17s",
-  "mcp:prior_cases:0.12s",
-  "mcp:similar_closed_cases:0.06s",
-  "mcp:similar_agent_cases:0.06s",
-  "mcp:policy_search:0.06s",
-  "mcp:prior_cases:0.11s",
-  "restpp:upsert_case",
-  "mcp:txn_context:0.16s",
-  "mcp:card_window:0.22s",
-  "mcp:card_profile:0.12s",
-  "mcp:client_history:0.11s",
-  "mcp:device_fanout:0.18s",
-  "mcp:peer_txns:0.14s",
-  "mcp:prior_cases:0.12s",
-  "mcp:similar_closed_cases:0.06s",
-  "mcp:similar_agent_cases:0.06s",
-  "mcp:policy_search:0.06s",
-  "mcp:device_fanout:0.51s",
+  "mcp:txn_context:0.18s",
+  "mcp:card_window:0.33s",
+  "mcp:card_profile:0.15s",
+  "mcp:client_history:0.13s",
+  "mcp:device_fanout:0.23s",
+  "mcp:peer_txns:0.18s",
+  "mcp:prior_cases:0.17s",
+  "mcp:similar_closed_cases:0.09s",
+  "mcp:similar_agent_cases:0.11s",
+  "mcp:policy_search:0.08s",
+  "mcp:device_fanout:0.19s",
+  "mcp:card_window:0.14s",
   "restpp:upsert_case"
  ],
  "llm": {
   "provider": "gemini",
-  "model": "gemini-flash-lite-latest",
-  "calls": 10,
+  "model": "gemini-3.5-flash-lite",
+  "calls": 3,
   "errors": []
  }
 }

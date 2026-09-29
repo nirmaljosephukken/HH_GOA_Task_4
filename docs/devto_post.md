@@ -14,7 +14,7 @@ We built **SentinelGraph**, an AI agent that works the alert like a sharp analys
 
 **590,742** transactions in the graph · **5,565** closed cases as memory · **16** GSQL queries via MCP · **0.914** memory-model AUC (bank score: 0.866) · **28** cards in the biggest ring we found
 
-🔗 **Code:** https://github.com/nirmaljosephukken/HH_GOA_Task_4 · 🎬 **Demo:** <VIDEO_LINK>
+🔗 **Code:** https://github.com/nirmaljosephukken/HH_GOA_Task_4 · 🎬 **Demo:** https://youtu.be/Rw8Wb1xVlPg
 
 ---
 

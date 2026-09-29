@@ -81,7 +81,7 @@
         ]
       },
       {
-        "claim": "Investigator note (LLM): Device fanout confirms a cluster of identical online transactions (~$59.67, Product C) across multiple cards using the same Windows Edge 16.0 device profile within a 48-hour window. Several of these connected transactions received high model risk scores and match known fraud profiles. Card C09988-K1 shows no prior activity in the checked window, supporting the unauthorized status report.",
+        "claim": "Investigator note (LLM): Device fanout revealed a coordinated multi-card testing and deployment pattern across numerous accounts over 48 hours. Specifically, card C08374-K1 showed multiple high-scoring online transactions at clustered amounts via the same Windows Edge device profile. The target transaction matches these velocity clusters and high model scores. The evidence overwhelmingly points to automated card testing and enumeration fraud.",
         "source": "graph",
         "ref": "llm_investigator",
         "entity_ids": [
@@ -96,7 +96,7 @@
       "CC-2269",
       "CC-0853"
     ],
-    "summary": "This case was triggered by a customer report from C09988 stating they never made a $59.67 purchase on card C09988-K1, referencing transaction 3534820. The graph showed a cluster of identical online transactions across multiple cards using the same Windows Edge 16.0 device profile within a 48-hour window. The verdict is fraud with an initial and final probability of 0.99, supported by historical case-memory data and connected card patterns. The actions taken include creating the case and monitoring connected cards automatically, while blocking the card and filing a report are recommended and pending approval.",
+    "summary": "This case was triggered by customer C09988 reporting an unauthorized online purchase of $59.67 on card C09988-K1, stating they never made the transaction. The graph analysis revealed a peer device connection involving 3 other cards that made near-identical purchases within 48 hours on the same device profile, scoring as likely fraud. The verdict is confirmed fraud with a final fraud probability of 0.99, supported by the customer report and case-memory models. Consequently, the card block and file report actions are recommended and pending approval, while the case creation and connected cards monitoring actions were executed automatically.",
     "written_to_graph": true,
     "graph_case_id": "CASE-2016-0016"
   },
@@ -116,12 +116,12 @@
       {
         "action": "FILE_REPORT",
         "route": "L2",
-        "reason": "policy 3a, R6: fraud confirmed or strongly suspected and the activity connects to a shared device profile or to fraud on other cards"
+        "reason": "policy 3a, R6: fraud confirmed or strongly suspected and the activity is linked to fraud on 3 other card(s) (3 via near-identical purchase on the same device profile)"
       },
       {
         "action": "MONITOR_CONNECTED_CARDS",
         "route": "auto",
-        "reason": "R6: 3 other card(s) share the device/ring"
+        "reason": "R6: 3 other card(s) are linked to this activity (3 via near-identical purchase on the same device profile)"
       }
     ],
     "final": [
@@ -138,20 +138,20 @@
       {
         "action": "FILE_REPORT",
         "route": "L2",
-        "reason": "policy 3a, R6: fraud confirmed or strongly suspected and the activity connects to a shared device profile or to fraud on other cards"
+        "reason": "policy 3a, R6: fraud confirmed or strongly suspected and the activity is linked to fraud on 3 other card(s) (3 via near-identical purchase on the same device profile)"
       },
       {
         "action": "MONITOR_CONNECTED_CARDS",
         "route": "auto",
-        "reason": "R6: 3 other card(s) share the device/ring"
+        "reason": "R6: 3 other card(s) are linked to this activity (3 via near-identical purchase on the same device profile)"
       }
     ],
     "what_changed": "nothing"
   },
   "sar": {
     "file": true,
-    "reason": "File (policy 3a, R6): fraud confirmed or strongly suspected and the activity connects to a shared device profile or to fraud on other cards.",
-    "narrative": "This Suspicious Activity Report details fraudulent activity involving customer C09988, card C09988-K1, and device profile Windows |  | edge 16.0 |. On 2016-12-11 22:39:08, an online transaction of $59.67 for product C was carried out using a new device for this account. The activity was discovered when the cardholder reported the transaction as unauthorized via message, stating they never made this $59.67 purchase. The incident occurred through the online channel and is suspicious because it connects to a shared device profile and matches a cluster of identical online transactions on 3 other cards, specifically C00854-K2, C06224-K2, and C09251-K1, within a 48-hour window. The total exposure amount is $59.67. Case-memory models gave the transaction a calibrated fraud rate of 65.1% with an initial fraud probability of 0.99. Automatic actions taken include recording the investigation in the graph and monitoring connected cards, while blocking the card and filing a report under policy 3a and rule R6 are recommended and pending approval.",
+    "reason": "File (policy 3a, R6): fraud confirmed or strongly suspected and the activity is linked to fraud on 3 other card(s) (3 via near-identical purchase on the same device profile).",
+    "narrative": "This suspicious activity involves customer C09988, card C09988-K1, and a new device profile using Windows and edge 16.0. On 2016-12-11 at 22:39:08, an unauthorized online transaction of $59.67 was carried out. The activity was conducted through an online channel using a new device. It is suspicious because the cardholder denied the transaction, the identity record marks the device as new, and the activity is linked to fraud on 3 other cards (C00854-K2, C06224-K2, C09251-K1) via near-identical purchases within 48 hours on the same peer device. The total exposure amount is $59.67. Actions taken include creating the case and monitoring connected cards automatically, while blocking the card and filing a report are recommended and pending approval under policy rule R2, policy 3a, and R6. How the 3 connected card(s) are linked: 3 card(s) made a near-identical purchase within 48 hours on the same device profile.",
     "subjects": [
       "C09988",
       "C09988-K1",
@@ -168,6 +168,6 @@
   },
   "stop_reason": "Stopped under policy section 6: probability 0.99 with at least two independent lines of evidence; further steps would not change the decision.",
   "tool_calls": 13,
-  "tokens": 6416,
-  "latency_s": 12.4
+  "tokens": 9542,
+  "latency_s": 10.9
 }

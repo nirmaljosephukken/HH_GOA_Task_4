@@ -49,10 +49,10 @@
      "customer": 2,
      "customer_cards": 1
     },
-    "latency_s": 0.126,
+    "latency_s": 0.686,
     "transport": "mcp"
    },
-   "elapsed_s": 0.13
+   "elapsed_s": 0.69
   },
   {
    "step": 4,
@@ -68,10 +68,10 @@
     "result": {
      "rows": 67
     },
-    "latency_s": 0.152,
+    "latency_s": 0.169,
     "transport": "mcp"
    },
-   "elapsed_s": 0.28
+   "elapsed_s": 0.86
   },
   {
    "step": 5,
@@ -95,10 +95,10 @@
      "first_ts": "2016-07-04 19:14:19",
      "last_ts": "2016-11-21 23:39:05"
     },
-    "latency_s": 0.122,
+    "latency_s": 0.159,
     "transport": "mcp"
    },
-   "elapsed_s": 0.4
+   "elapsed_s": 1.02
   },
   {
    "step": 6,
@@ -112,10 +112,10 @@
     "result": {
      "rows": 1
     },
-    "latency_s": 0.129,
+    "latency_s": 0.132,
     "transport": "mcp"
    },
-   "elapsed_s": 0.53
+   "elapsed_s": 1.15
   },
   {
    "step": 7,
@@ -132,10 +132,10 @@
      "device": 2,
      "txns": 54
     },
-    "latency_s": 0.128,
+    "latency_s": 0.139,
     "transport": "mcp"
    },
-   "elapsed_s": 0.66
+   "elapsed_s": 1.29
   },
   {
    "step": 8,
@@ -148,12 +148,12 @@
     },
     "result": {
      "closed_cases": 4,
-     "agent_cases": 1
+     "agent_cases": 2
     },
-    "latency_s": 0.126,
+    "latency_s": 0.136,
     "transport": "mcp"
    },
-   "elapsed_s": 0.78
+   "elapsed_s": 1.42
   },
   {
    "step": 9,
@@ -172,10 +172,10 @@
     "result": {
      "rows": 6
     },
-    "latency_s": 0.15,
+    "latency_s": 0.166,
     "transport": "mcp"
    },
-   "elapsed_s": 0.93
+   "elapsed_s": 1.59
   },
   {
    "step": 10,
@@ -189,12 +189,12 @@
     "result": {
      "closed_cases": 0,
      "connected_closed_cases": 0,
-     "agent_cases": 1
+     "agent_cases": 2
     },
-    "latency_s": 0.134,
+    "latency_s": 0.137,
     "transport": "mcp"
    },
-   "elapsed_s": 1.07
+   "elapsed_s": 1.73
   },
   {
    "step": 11,
@@ -288,13 +288,13 @@
      "step": 10
     },
     {
-     "claim": "Case memory: this device profile is on confirmed closed case(s) CC-2985, CC-2971, CC-2649, CC-3035 (analysts labelled 4 of them as an undocumented pattern)",
+     "claim": "Case memory: this device profile is on confirmed closed case(s) CC-2985, CC-2649, CC-2971, CC-3035 (analysts labelled 4 of them as an undocumented pattern)",
      "source": "graph",
      "ref": "device_cases",
      "entity_ids": [
       "CC-2985",
-      "CC-2971",
       "CC-2649",
+      "CC-2971",
       "CC-3035"
      ],
      "lr": 3.0,
@@ -303,7 +303,7 @@
      "step": 10
     }
    ],
-   "elapsed_s": 1.07
+   "elapsed_s": 1.73
   },
   {
    "step": 12,
@@ -318,10 +318,10 @@
     "result": {
      "rows": 8
     },
-    "latency_s": 0.067,
+    "latency_s": 0.076,
     "transport": "mcp"
    },
-   "elapsed_s": 1.14
+   "elapsed_s": 1.8
   },
   {
    "step": 13,
@@ -336,10 +336,10 @@
     "result": {
      "rows": 6
     },
-    "latency_s": 0.068,
+    "latency_s": 0.08,
     "transport": "mcp"
    },
-   "elapsed_s": 1.2
+   "elapsed_s": 1.88
   },
   {
    "step": 14,
@@ -354,51 +354,81 @@
     "result": {
      "rows": 4
     },
-    "latency_s": 0.063,
+    "latency_s": 0.073,
     "transport": "mcp"
    },
-   "elapsed_s": 1.27
+   "elapsed_s": 1.96
   },
   {
    "step": 15,
    "ts": "2016-11-22 20:18:30",
    "kind": "tool",
-   "title": "llm:prior_cases(customer_id=C13487)",
+   "title": "llm:device_fanout(device=SM-G935F Build/NRD90M | Android 7.0 | chrome 62.0 for android | 1920x1080, t0=2016-11-12 16:11:00, t1=2016-12-02 16:11:00)",
    "detail": {
     "args": {
-     "customer_id": "C13487"
+     "device": "SM-G935F Build/NRD90M | Android 7.0 | chrome 62.0 for android | 1920x1080",
+     "t0": "2016-11-12 16:11:00",
+     "t1": "2016-12-02 16:11:00"
     },
     "result": {
-     "closed_cases": 0,
-     "connected_closed_cases": 0,
-     "agent_cases": 1
+     "device": 2,
+     "txns": 54
     },
-    "latency_s": 0.142,
+    "latency_s": 0.166,
     "transport": "mcp"
    },
-   "elapsed_s": 2.45
+   "elapsed_s": 9.27
   },
   {
    "step": 16,
    "ts": "2016-11-22 20:19:00",
-   "kind": "llm",
-   "title": "LLM investigator (gemini-3.5-flash-lite): 1 extra tool call(s)",
+   "kind": "tool",
+   "title": "llm:card_window(card_id=C13487-K1, t0=2016-11-15 16:11:00, t1=2016-11-22 16:11:00)",
    "detail": {
-    "calls": [
-     {
-      "tool": "prior_cases",
-      "args": {
-       "customer_id": "C13487"
-      }
-     }
-    ],
-    "notes": "Checked customer C13487 prior cases, showing no historical fraud or previous investigations. The flagged transaction uses a device profile strongly tied to a known multi-card fraud ring involving confirmed cases CC-2985, CC-2971, CC-2649, and CC-3035. Despite the low individual transaction score, the device is consistently associated with anonymous proxies and undocumented scheme activity. Uncertainty remains regarding whether this specific cardholder authorized the transaction or if the account was compromised by the shared-device ring."
+    "args": {
+     "card_id": "C13487-K1",
+     "t0": "2016-11-15 16:11:00",
+     "t1": "2016-11-22 16:11:00"
+    },
+    "result": {
+     "rows": 4
+    },
+    "latency_s": 0.135,
+    "transport": "mcp"
    },
-   "elapsed_s": 3.97
+   "elapsed_s": 9.41
   },
   {
    "step": 17,
    "ts": "2016-11-22 20:19:30",
+   "kind": "llm",
+   "title": "LLM investigator (gemini-3.5-flash-lite): 2 extra tool call(s)",
+   "detail": {
+    "calls": [
+     {
+      "tool": "device_fanout",
+      "args": {
+       "device": "SM-G935F Build/NRD90M | Android 7.0 | chrome 62.0 for android | 1920x1080",
+       "t0": "2016-11-12 16:11:00",
+       "t1": "2016-12-02 16:11:00"
+      }
+     },
+     {
+      "tool": "card_window",
+      "args": {
+       "t1": "2016-11-22 16:11:00",
+       "card_id": "C13487-K1",
+       "t0": "2016-11-15 16:11:00"
+      }
+     }
+    ],
+    "notes": "Device fanout confirms the exact mobile profile was used across numerous distinct cards in rapid succession, all via anonymous proxy and flagged as new devices. Card history for C13487 shows a prior online purchase from the same profile 7 days earlier with matching billing attributes. The pattern strongly mirrors the shared-device fraud ring documented in prior cases (CC-2985, CC-2649). Remaining uncertainty lies in distinguishing whether this specific cardholder is a willing participant or an account-takeover victim."
+   },
+   "elapsed_s": 10.79
+  },
+  {
+   "step": 18,
+   "ts": "2016-11-22 20:20:00",
    "kind": "assess",
    "title": "Fraud probability 0.89 (memory-model prior 0.01); confidence high; hypothesis undocumented; exposure $439.61",
    "detail": {
@@ -426,11 +456,11 @@
      "Evidence conflicts: device, history, network, trigger point to fraud; ml point to legitimate use"
     ]
    },
-   "elapsed_s": 3.97
+   "elapsed_s": 10.79
   },
   {
-   "step": 18,
-   "ts": "2016-11-22 20:20:00",
+   "step": 19,
+   "ts": "2016-11-22 20:20:30",
    "kind": "decision",
    "title": "Initial next best action: BLOCK_CARD, CREATE_CASE, FILE_REPORT, MONITOR_CONNECTED_CARDS, ESCALATE_TO_ANALYST",
    "detail": {
@@ -448,12 +478,12 @@
      {
       "action": "FILE_REPORT",
       "route": "L2",
-      "reason": "policy 3a, R6, R9: fraud confirmed or strongly suspected and the activity connects to a shared device profile or to fraud on other cards; the pattern is coordinated and undocumented (R9)"
+      "reason": "policy 3a, R6, R9: fraud confirmed or strongly suspected and the activity is linked to fraud on 27 other card(s) (27 via same rare device profile); the pattern is coordinated and undocumented (R9)"
      },
      {
       "action": "MONITOR_CONNECTED_CARDS",
       "route": "auto",
-      "reason": "R6: 27 other card(s) share the device/ring"
+      "reason": "R6: 27 other card(s) are linked to this activity (27 via same rare device profile)"
      },
      {
       "action": "ESCALATE_TO_ANALYST",
@@ -465,11 +495,11 @@
     "why_request": "",
     "policy_check": []
    },
-   "elapsed_s": 3.97
+   "elapsed_s": 10.79
   },
   {
-   "step": 19,
-   "ts": "2016-11-22 20:20:30",
+   "step": 20,
+   "ts": "2016-11-22 20:21:00",
    "kind": "execute",
    "title": "Executed 3 auto action(s); 2 queued for approval",
    "detail": {
@@ -483,23 +513,23 @@
      "FILE_REPORT (L2)"
     ]
    },
-   "elapsed_s": 3.97
-  },
-  {
-   "step": 20,
-   "ts": "2016-11-22 20:21:00",
-   "kind": "llm",
-   "title": "Case narrative written by gemini-3.5-flash-lite (3/3 fields accepted)",
-   "detail": {
-    "summary": "This case was triggered by an analyst request to review transaction 3478561 on card C13487-K1 along with related activity due to an unusual device profile. The graph showed that the device profile 'SM-G935F Build/NRD90M | Android 7.0 | chrome 62.0 for android | 1920x1080' was shared across 28 cards ",
-    "sar_narrative": "This suspicious activity report details fraud involving customer C13487, card C13487-K1, and online transactions conducted between November 15, 2016, and November 26, 2016. The illicit activity was carried out through the online channel using an unusual device profile identified as 'SM-G935F Build/N",
-    "pattern_description": "The undocumented pattern involves a shared-device fraud ring where multiple cards across different customers utilize the exact same mobile device profile and anonymous proxy to execute card-not-present online purchases. It affects various accounts and cards linked to the shared device and was found "
-   },
-   "elapsed_s": 7.26
+   "elapsed_s": 10.79
   },
   {
    "step": 21,
    "ts": "2016-11-22 20:21:30",
+   "kind": "llm",
+   "title": "Case narrative written by gemini-3.5-flash-lite (3/3 fields accepted)",
+   "detail": {
+    "summary": "This case was triggered by an analyst request to review transaction 3478561 on card C13487-K1 and related activity showing purchases from an unusual device profile. The graph showed the flagged card connected to 27 other cards through a shared device profile, which was also linked to four confirmed ",
+    "sar_narrative": "Customer C13487 holding card C13487-K1 was identified conducting online transactions using a new device profile behind an anonymous proxy in billing region 191. Between 2016-11-15 and 2016-11-26, three affected transactions totaling $439.61 were processed via the online channel using a rare mobile d",
+    "pattern_description": "This undocumented pattern involves a coordinated shared-device scheme where numerous distinct cards make online purchases using the exact same rare mobile device profile behind an anonymous proxy. It affects multiple customer accounts and was uncovered through analyst-requested graph network analysi"
+   },
+   "elapsed_s": 16.44
+  },
+  {
+   "step": 22,
+   "ts": "2016-11-22 20:22:00",
    "kind": "memory",
    "title": "Case CASE-2016-0014 written to case memory (escalated, fraud, undocumented)",
    "detail": {
@@ -509,67 +539,29 @@
      "devices": 1,
      "similar_closed_cases": [
       "CC-2985",
-      "CC-2971",
       "CC-2649",
+      "CC-2971",
       "CC-3035"
      ]
     }
    },
-   "elapsed_s": 7.26
+   "elapsed_s": 16.44
   }
  ],
  "transport": [
-  "mcp:txn_context:0.47s",
-  "mcp:card_window:0.11s",
-  "mcp:card_profile:0.11s",
-  "mcp:client_history:0.10s",
-  "mcp:device_fanout:0.15s",
-  "mcp:peer_txns:0.11s",
-  "mcp:prior_cases:0.09s",
-  "mcp:similar_closed_cases:0.05s",
-  "mcp:similar_agent_cases:0.05s",
-  "mcp:policy_search:0.05s",
-  "mcp:prior_cases:0.09s",
-  "mcp:card_window:0.09s",
-  "restpp:upsert_case",
-  "mcp:txn_context:0.47s",
-  "mcp:card_window:0.14s",
-  "mcp:card_profile:0.12s",
-  "mcp:client_history:0.12s",
-  "mcp:device_fanout:0.12s",
-  "mcp:device_cases:0.12s",
-  "mcp:peer_txns:0.13s",
-  "mcp:prior_cases:0.12s",
-  "mcp:similar_closed_cases:0.07s",
+  "mcp:txn_context:0.69s",
+  "mcp:card_window:0.17s",
+  "mcp:card_profile:0.16s",
+  "mcp:client_history:0.13s",
+  "mcp:device_fanout:0.14s",
+  "mcp:device_cases:0.14s",
+  "mcp:peer_txns:0.17s",
+  "mcp:prior_cases:0.14s",
+  "mcp:similar_closed_cases:0.08s",
   "mcp:similar_agent_cases:0.08s",
   "mcp:policy_search:0.07s",
+  "mcp:device_fanout:0.16s",
   "mcp:card_window:0.14s",
-  "restpp:upsert_case",
-  "mcp:txn_context:0.13s",
-  "mcp:card_window:0.15s",
-  "mcp:card_profile:0.12s",
-  "mcp:client_history:0.12s",
-  "mcp:device_fanout:0.12s",
-  "mcp:peer_txns:0.17s",
-  "mcp:prior_cases:0.13s",
-  "mcp:amount_band_scan:0.16s",
-  "mcp:similar_closed_cases:0.07s",
-  "mcp:similar_agent_cases:0.07s",
-  "mcp:policy_search:0.07s",
-  "mcp:device_fanout:0.12s",
-  "restpp:upsert_case",
-  "mcp:txn_context:0.13s",
-  "mcp:card_window:0.15s",
-  "mcp:card_profile:0.12s",
-  "mcp:client_history:0.13s",
-  "mcp:device_fanout:0.13s",
-  "mcp:device_cases:0.13s",
-  "mcp:peer_txns:0.15s",
-  "mcp:prior_cases:0.13s",
-  "mcp:similar_closed_cases:0.07s",
-  "mcp:similar_agent_cases:0.07s",
-  "mcp:policy_search:0.06s",
-  "mcp:prior_cases:0.14s",
   "restpp:upsert_case"
  ],
  "llm": {

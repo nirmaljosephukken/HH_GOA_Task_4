@@ -100,15 +100,7 @@
         ]
       },
       {
-        "claim": "Earlier agent cases with a similar profile: CASE-2016-PRO-005 (fraud, card_not_present_new_device)",
-        "source": "graph",
-        "ref": "similar_agent_cases",
-        "entity_ids": [
-          "CASE-2016-PRO-005"
-        ]
-      },
-      {
-        "claim": "Investigator note (LLM): Device fanout showed the shared MotoG3 profile was used on multiple other cards around the same time with similarly high memory model scores (e.g., C05381-K2, C07562-K2, and C09657-K2). Card C09657-K2's window confirmed a matching low-amount online transaction ($14.32) scored at 0.98. These lookups reinforce a cross-card fraudulent testing pattern using the MotoG3 device profile. Remaining uncertainty centers on whether the legitimate cardholder is compromised or if these are entirely synthetic profile attacks.",
+        "claim": "Investigator note (LLM): Device fanout confirmed that the MotoG3 profile was reused across multiple cards within days, hitting high memory scores (e.g., $14.32 on C09657-K2 and $13.36 on C13171-K2). Customer C13364 has a repeated history of confirmed card-not-present fraud on card K1. The transaction matches a coordinated low-amount testing/fraud pattern across shared device clusters.",
         "source": "graph",
         "ref": "llm_investigator",
         "entity_ids": [
@@ -121,7 +113,7 @@
       "CC-4657",
       "CC-1181"
     ],
-    "summary": "This case was triggered by an analyst request monitoring device profile MotoG3 Build/MPIS24.65-33.1-2-16 |  | chrome 66.0 for android | used on 17 cards in Nov-Dec. The graph and investigation revealed that this device profile was shared across 9 other cards within plus or minus 10 days, showing high memory-model scores and a cross-card fraudulent testing pattern. The final verdict is fraud with an initial and final fraud probability of 0.99, because the activity connects to a shared device profile and matches fraud on other cards. For next steps, the system automatically created the case and monitored connected cards, while card blocking is recommended at L1 and reporting is recommended at L2 pending human approval.",
+    "summary": "This case was triggered by an analyst request monitoring device profile MotoG3 Build/MPIS24.65-33.1-2-16 |  | chrome 66.0 for android | used on 17 cards in Nov-Dec. The graph showed this device profile linked the flagged card to 9 other cards, involving a near-identical purchase within 48 hours on the same device profile. The verdict is fraud with an initial and final fraud probability of 0.99, because of high memory-model scores, shared rare device profiles, and a coordinated low-amount testing pattern. Actions taken include blocking the card, creating a case, monitoring connected cards, and filing a report.",
     "written_to_graph": true,
     "graph_case_id": "CASE-2016-PRO-004"
   },
@@ -141,12 +133,12 @@
       {
         "action": "FILE_REPORT",
         "route": "L2",
-        "reason": "policy 3a, R6: fraud confirmed or strongly suspected and the activity connects to a shared device profile or to fraud on other cards"
+        "reason": "policy 3a, R6: fraud confirmed or strongly suspected and the activity is linked to fraud on 9 other card(s) (9 via same rare device profile; 1 via near-identical purchase on the same device profile)"
       },
       {
         "action": "MONITOR_CONNECTED_CARDS",
         "route": "auto",
-        "reason": "R6: 9 other card(s) share the device/ring"
+        "reason": "R6: 9 other card(s) are linked to this activity (9 via same rare device profile; 1 via near-identical purchase on the same device profile)"
       }
     ],
     "final": [
@@ -163,20 +155,20 @@
       {
         "action": "FILE_REPORT",
         "route": "L2",
-        "reason": "policy 3a, R6: fraud confirmed or strongly suspected and the activity connects to a shared device profile or to fraud on other cards"
+        "reason": "policy 3a, R6: fraud confirmed or strongly suspected and the activity is linked to fraud on 9 other card(s) (9 via same rare device profile; 1 via near-identical purchase on the same device profile)"
       },
       {
         "action": "MONITOR_CONNECTED_CARDS",
         "route": "auto",
-        "reason": "R6: 9 other card(s) share the device/ring"
+        "reason": "R6: 9 other card(s) are linked to this activity (9 via same rare device profile; 1 via near-identical purchase on the same device profile)"
       }
     ],
     "what_changed": "nothing"
   },
   "sar": {
     "file": true,
-    "reason": "File (policy 3a, R6): fraud confirmed or strongly suspected and the activity connects to a shared device profile or to fraud on other cards.",
-    "narrative": "This suspicious activity report details fraudulent transactions involving customer C13364 and card C13364-K1. The activity took place online on 2016-12-09, specifically flagging transaction ID 3527057 for the amount of $14.31. The fraud was carried out using the online channel and the device profile MotoG3 Build/MPIS24.65-33.1-2-16 |  | chrome 66.0 for android |. It is suspicious because the same device profile was used across 10 cards between 2016-12-09 and 2016-12-18, indicating a cross-card fraudulent testing pattern linked to a shared device ring. The total exposure amount for the flagged transaction is $14.31. Regarding actions taken, the system automatically created the case and monitored connected cards, while card blocking and report filing have been routed for review.",
+    "reason": "File (policy 3a, R6): fraud confirmed or strongly suspected and the activity is linked to fraud on 9 other card(s) (9 via same rare device profile; 1 via near-identical purchase on the same device profile).",
+    "narrative": "Customer C13364 and card C13364-K1 were involved in fraudulent online activity on 2016-12-09 involving a transaction amount of $14.31 using product C and device profile MotoG3 Build/MPIS24.65-33.1-2-16 |  | chrome 66.0 for android |. The activity was carried out via the online channel using a shared rare device profile that was reused across multiple cards within days, hitting high memory scores and matching a coordinated low-amount testing or fraud pattern. It is suspicious because the device profile is rare, with only 27 uses in the whole dataset, and is linked to 9 other cards via shared device profiles and near-identical purchases within 48 hours. The total exposure amount is $14.31. Actions taken include blocking the card (route L1), creating a case (route auto), filing a report (route L2), and monitoring connected cards (route auto) under policy 3a and R6. How the 9 connected card(s) are linked: 9 card(s) use the same rare device profile as this card; 1 card(s) made a near-identical purchase within 48 hours on the same device profile.",
     "subjects": [
       "C13364",
       "C13364-K1",
@@ -199,6 +191,6 @@
   },
   "stop_reason": "Stopped under policy section 6: probability 0.99 with at least two independent lines of evidence; further steps would not change the decision.",
   "tool_calls": 14,
-  "tokens": 8384,
-  "latency_s": 27.2
+  "tokens": 8153,
+  "latency_s": 7.8
 }

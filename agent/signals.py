@@ -119,8 +119,16 @@ class Findings:
     episode: dict[str, dict] = field(default_factory=dict)        # txn_id -> row (the fraud episode)
     connected_cards: dict[str, str] = field(default_factory=dict)  # card_id -> why
     connected_devices: dict[str, str] = field(default_factory=dict)
+    links: dict[str, set] = field(default_factory=dict)           # card_id -> link kinds (see agent/linkage.py)
     pattern_votes: dict[str, float] = field(default_factory=dict)
     flags: dict[str, object] = field(default_factory=dict)
+
+    def link(self, card: str, kind: str, why: str) -> None:
+        self.links.setdefault(card, set()).add(kind)
+        if card not in self.connected_cards:
+            self.connected_cards[card] = why
+        elif why not in self.connected_cards[card]:
+            self.connected_cards[card] += "; " + why
 
     def vote(self, pattern: str, w: float):
         self.pattern_votes[pattern] = max(self.pattern_votes.get(pattern, 0.0), w)
@@ -303,7 +311,8 @@ def d_structuring_network(flagged: dict, band_rows: list[dict], step: int, f: Fi
     if not hits:
         return []
     for c, cl in hits.items():
-        f.connected_cards[c] = f"same structuring pattern ({len(cl)} x just-under-$500 on {cl[0]['ts'][:10]})"
+        f.link(c, "structuring", f"same structuring pattern ({len(cl)} x just-under-$500 within an hour on "
+                                 f"{cl[0]['ts'][:10]}); linked by amount and timing, no shared device")
     f.flags["structuring_network"] = sorted(hits)
     ids = sorted(hits)
     return [ev(f"The same structuring pattern appears on {len(hits)} other cards in the surrounding 30 days "
@@ -370,7 +379,7 @@ def d_device_ring(flagged: dict, fan: dict, dev_cases: dict, step: int, f: Findi
         return out
     lr = min(80.0, 5.0 + 2.5 * len(cards) + (15.0 if confirmed else 0) + 5.0 * len(susp))
     for c in cards:
-        f.connected_cards[c] = f"shares device profile '{dp}'"
+        f.link(c, "shared_device", f"shares device profile '{dp}'")
     f.connected_devices[dp] = f"used by {len(cards) + 1} cards between {rows[0]['ts'][:10]} and {rows[-1]['ts'][:10]}"
     for r in [r for r in rows if r["card_id"] == flagged["card_id"]]:
         f.episode[r["id"]] = r
@@ -406,8 +415,12 @@ def d_peers(flagged: dict, peers: list[dict], step: int, f: Findings) -> list[Ev
                        "network", step)]
         return []
     for c in cards:
-        if c not in f.connected_cards:
-            f.connected_cards[c] = "same amount/email/device pattern within 48h, scored as likely fraud"
+        rows_c = [r for r in susp if r["card_id"] == c]
+        if dev_ok and any(r["via_device"] for r in rows_c):
+            f.link(c, "peer_device", "near-identical purchase within 48h on the same device profile, scored as likely fraud")
+        else:
+            f.link(c, "peer_email", "near-identical purchase within 48h with the same purchaser and recipient email "
+                                    "domains, scored as likely fraud")
     if dev_ok and any(r["via_device"] for r in susp):
         f.connected_devices.setdefault(flagged["device_profile"], f"also used on {', '.join(cards[:5])}")
     f.flags["peer_cluster"] = {"cards": cards, "txns": [r["id"] for r in susp]}

@@ -39,6 +39,7 @@ class Situation:
     card_testing: bool = False
     testing_large_over_100: bool = False
     shared_origin: bool = False          # shared device / ring / connected other-card fraud (R6, R2 report)
+    link_summary: str = ""               # how the connected cards are linked, from the evidence (agent/linkage.py)
     coordinated_undocumented: bool = False  # R9
     connected_cards: int = 0
     compromised_cards_of_customer: int = 1
@@ -84,14 +85,15 @@ def sar_decision(s: Situation, fraud: bool) -> tuple[bool, str]:
     if s.exposure > 1000:
         why.append(f"exposure ${s.exposure:,.2f} exceeds $1,000")
     if s.shared_origin:
-        why.append("the activity connects to a shared device profile or to fraud on other cards")
+        why.append(f"the activity is linked to fraud on {s.connected_cards} other card(s) ({s.link_summary})"
+                   if s.link_summary else f"the activity is linked to fraud on {s.connected_cards} other card(s)")
     if s.coordinated_undocumented:
         why.append("the pattern is coordinated and undocumented (R9)")
     if why:
         return True, "File (policy 3a" + (", R6" if s.shared_origin else "") + (", R9" if s.coordinated_undocumented else "") + \
             "): fraud confirmed or strongly suspected and " + "; ".join(why) + "."
     return False, (f"No report (policy 3a): fraud is confirmed but exposure ${s.exposure:,.2f} is under $1,000, no "
-                   f"shared device/region/ring link and the pattern is documented. Case only.")
+                   f"link to fraud on other cards and the pattern is documented. Case only.")
 
 
 def fraud_actions(s: Situation, plan: Plan, rule: str) -> None:
@@ -108,7 +110,8 @@ def fraud_actions(s: Situation, plan: Plan, rule: str) -> None:
         plan.add("BLOCK_ALL_CARDS", "R10: two or more of the customer's cards show confirmed fraud")
     plan.add("CREATE_CASE", ("R2" if rule == "R2" else "Policy 3a") + ": record the investigation and write it to the graph")
     if s.connected_cards:
-        plan.add("MONITOR_CONNECTED_CARDS", f"R6: {s.connected_cards} other card(s) share the device/ring")
+        plan.add("MONITOR_CONNECTED_CARDS", f"R6: {s.connected_cards} other card(s) are linked to this activity"
+                                            + (f" ({s.link_summary})" if s.link_summary else ""))
     sar, why = sar_decision(s, True)
     if sar:
         plan.add("FILE_REPORT", why.replace("File (", "").rstrip(".").replace("): ", ": ", 1))
